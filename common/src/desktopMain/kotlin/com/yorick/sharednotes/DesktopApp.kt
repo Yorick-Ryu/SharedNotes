@@ -1,4 +1,4 @@
-package com.yorick.common
+package com.yorick.sharednotes
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable

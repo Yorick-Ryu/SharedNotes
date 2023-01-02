@@ -9,6 +9,7 @@ allprojects {
     }
 }
 
+
 plugins {
     kotlin("multiplatform") apply false
     kotlin("android") apply false

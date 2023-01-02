@@ -1,4 +1,4 @@
-package com.yorick.common
+package com.yorick.sharednotes
 
 actual fun getPlatformName(): String {
     return "Desktop"

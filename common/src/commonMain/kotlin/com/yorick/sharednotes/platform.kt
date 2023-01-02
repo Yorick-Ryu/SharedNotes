@@ -1,3 +1,3 @@
-package com.yorick.common
+package com.yorick.sharednotes
 
 expect fun getPlatformName(): String

@@ -1,7 +1,7 @@
-package com.yorick.common
+package com.yorick.sharednotes
 
-import androidx.compose.material.Text
-import androidx.compose.material.Button
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

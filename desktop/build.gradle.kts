@@ -31,7 +31,7 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "com.yorick.sharednotes.MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "SharedNotes"
