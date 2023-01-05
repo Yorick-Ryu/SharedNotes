@@ -1,6 +1,5 @@
 package com.yorick.sharednotes.ui.note
 
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,51 +15,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.yorick.sharednotes.data.model.Note
-import com.yorick.sharednotes.ui.components.SharedNotesAppBars
 import com.yorick.sharednotes.ui.components.SharedNotesSearchBar
-import com.yorick.sharednotes.ui.components.UIState
+import com.yorick.sharednotes.ui.components.SharedNotesTopBar
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
-import moe.tlaster.precompose.navigation.BackHandler
-
-@Composable
-fun NotesSinglePaneContent(
-    modifier: Modifier = Modifier,
-    notesUIState: UIState,
-    noteLazyListState: LazyListState,
-    closeDetailScreen: () -> Unit,
-    navigateToDetail: (Long, SharedNotesContentType) -> Unit,
-    addNote: () -> Unit,
-    tagsGrid: @Composable () -> Unit = {},
-) {
-    Crossfade(
-        targetState = notesUIState.selectedNote != null && notesUIState.isDetailOnlyOpen
-    ) { screen ->
-        when (screen) {
-            true -> {
-                BackHandler {
-                    closeDetailScreen()
-                }
-                notesUIState.selectedNote?.let {
-                    NoteDetailScreen(
-                        note = it,
-                        addNote = addNote,
-                        onBackPressed = { closeDetailScreen() }
-                    )
-                }
-            }
-
-            false -> {
-                NoteListScreen(
-                    notes = notesUIState.notes,
-                    noteLazyListState = noteLazyListState,
-                    modifier = modifier,
-                    navigateToDetail = navigateToDetail,
-                    tagsGrid = tagsGrid,
-                )
-            }
-        }
-    }
-}
 
 @Composable
 fun NoteListScreen(
@@ -97,7 +54,7 @@ fun NoteDetailScreen(
     addNote: () -> Unit = {},
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        SharedNotesAppBars(
+        SharedNotesTopBar(
             title = note.subject,
             isFullScreen = isFullScreen,
             onBackPressed = onBackPressed

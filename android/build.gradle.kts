@@ -14,6 +14,9 @@ repositories {
 dependencies {
     implementation(project(":common"))
     implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("com.google.accompanist:accompanist-adaptive:0.28.0")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha03")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.0-alpha03")
 }
 
 android {

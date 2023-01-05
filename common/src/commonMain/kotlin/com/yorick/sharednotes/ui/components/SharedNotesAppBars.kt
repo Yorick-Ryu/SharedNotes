@@ -3,7 +3,6 @@ package com.yorick.sharednotes.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
@@ -51,13 +50,13 @@ fun SharedNotesSearchBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SharedNotesAppBars(
+fun SharedNotesTopBar(
     title: String,
     isFullScreen: Boolean,
     modifier: Modifier = Modifier,
     onClickTitle: () -> Unit = {},
     onBackPressed: () -> Unit = {},
-    actions: @Composable (RowScope.() -> Unit) = {
+    actions: @Composable () -> Unit = {
         IconButton(onClick = { /*TODO*/ }) {
             Icon(
                 imageVector = Icons.Default.MoreVert,
@@ -67,12 +66,23 @@ fun SharedNotesAppBars(
         }
     }
 ) {
-    TopAppBar(
-        modifier = modifier,
-        backgroundColor = MaterialTheme.colorScheme.inverseOnSurface,
-        title = {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            if (isFullScreen) {
+                IconButton(
+                    onClick = onBackPressed,
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier,
                 horizontalAlignment = if (isFullScreen) Alignment.CenterHorizontally
                 else Alignment.Start
             ) {
@@ -84,26 +94,9 @@ fun SharedNotesAppBars(
                     )
                 }
             }
-        },
-        navigationIcon = {
-            if (isFullScreen) {
-                FilledIconButton(
-                    onClick = onBackPressed,
-                    modifier = Modifier.padding(8.dp),
-                    colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.inverseOnSurface,
-                        contentColor = MaterialTheme.colorScheme.onSurface
-                    )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
+            Row {
+                actions()
             }
-        },
-        actions = actions,
-    )
+        }
 }
 

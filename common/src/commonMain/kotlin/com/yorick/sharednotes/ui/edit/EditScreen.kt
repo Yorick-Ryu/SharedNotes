@@ -15,7 +15,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.yorick.sharednotes.ui.components.NewNoteAlertDialog
 import com.yorick.sharednotes.ui.components.SaveNoteAlertDialog
-import com.yorick.sharednotes.ui.components.SharedNotesAppBars
+import com.yorick.sharednotes.ui.components.SharedNotesTopBar
 import com.yorick.sharednotes.ui.note.NoteContent
 
 @Composable
@@ -60,33 +60,31 @@ fun EditScreen(
             onConfirm = onConfirmClose,
         )
     }
-    Column(modifier = modifier) {
-
-        SharedNotesAppBars(
+    Column(modifier = Modifier) {
+        SharedNotesTopBar(
             title = title,
             isFullScreen = true,
             onBackPressed = onBackPressed,
             onClickTitle = onClickTitle
         ) {
-            Row {
-                IconButton(onClick = onModeChanged) {
-                    Icon(
-                        imageVector = if (isEditModeEnabled) Icons.Default.Visibility else Icons.Default.Edit,
-                        contentDescription = "Preview",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                IconButton(onClick = onSavedNote) {
-                    Icon(
-                        imageVector = Icons.Default.Save,
-                        contentDescription = "preview",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+            IconButton(onClick = onModeChanged) {
+                Icon(
+                    imageVector = if (isEditModeEnabled) Icons.Default.Visibility else Icons.Default.Edit,
+                    contentDescription = "Preview",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            IconButton(onClick = onSavedNote) {
+                Icon(
+                    imageVector = Icons.Default.Save,
+                    contentDescription = "preview",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
         }
         if (isEditModeEnabled) {
             EditContent(
+                modifier = modifier,
                 text = text,
                 onBodyValueChange = onBodyValueChange,
                 onClickedTextButton = onClickedTextButton
@@ -111,6 +109,7 @@ fun EditContent(
         BasicTextField(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(top = 15.dp)
                 .weight(1f)
                 .padding(horizontal = 20.dp),
             value = text,

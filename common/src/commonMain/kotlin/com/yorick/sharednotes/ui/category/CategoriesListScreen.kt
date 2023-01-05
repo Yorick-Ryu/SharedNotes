@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.yorick.sharednotes.data.model.Category
 import com.yorick.sharednotes.data.model.Note
-import com.yorick.sharednotes.ui.components.SharedNotesAppBars
 import com.yorick.sharednotes.ui.components.SharedNotesListItem
 import com.yorick.sharednotes.ui.components.SharedNotesSearchBar
+import com.yorick.sharednotes.ui.components.SharedNotesTopBar
 import com.yorick.sharednotes.ui.note.NotesListItem
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 
@@ -49,7 +49,7 @@ fun CategoryNotesScreen(
     navigateToDetail: (Long, SharedNotesContentType) -> Unit
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        SharedNotesAppBars(
+        SharedNotesTopBar(
             title = notes.first().category.name,
             isFullScreen = isFullScreen,
             onBackPressed = onBackPressed

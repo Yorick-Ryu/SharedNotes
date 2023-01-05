@@ -9,7 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.yorick.sharednotes.data.model.Account
-import com.yorick.sharednotes.ui.components.SharedNotesAppBars
+import com.yorick.sharednotes.ui.components.SharedNotesTopBar
 import com.yorick.sharednotes.ui.components.SharedNotesSearchBar
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 
@@ -44,7 +44,7 @@ fun ContactDetailScreen(
     onBackPressed: () -> Unit = {}
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        SharedNotesAppBars(
+        SharedNotesTopBar(
             title = account.fullName,
             isFullScreen = isFullScreen,
             onBackPressed = onBackPressed
