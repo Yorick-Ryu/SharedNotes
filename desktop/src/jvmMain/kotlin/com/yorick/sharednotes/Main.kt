@@ -1,11 +1,17 @@
 package com.yorick.sharednotes
 
-import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.yorick.sharednotes.ui.theme.SharedNotesTheme
+import moe.tlaster.precompose.PreComposeWindow
 
 
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
-        App()
+    PreComposeWindow(
+        onCloseRequest = ::exitApplication,
+        title = "Shared Notes"
+    ) {
+        SharedNotesTheme {
+            App()
+        }
     }
 }

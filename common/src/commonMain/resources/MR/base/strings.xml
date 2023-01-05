@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Shared Notes</string>
+    <string name="navigation_drawer">Navigation Drawer</string>
+    <string name="tab_notes">Notes</string>
+    <string name="tab_contacts">Contacts</string>
+    <string name="tab_categories">Categories</string>
+    <string name="tab_tags">Tags</string>
+
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="search_notes">Search Notes</string>
+    <string name="search_contacts">Search Contacts</string>
+    <string name="search_categories">Search Categories</string>
+    <string name="search_tags">Search Tags</string>
+    <string name="reply">Reply</string>
+    <string name="reply_all">Reply All</string>
+
+    <string name="edit">Edit</string>
+    <string name="new_notes">New Notes</string>
+
+    <string name="empty_screen_title">Screen under construction</string>
+    <string name="empty_screen_subtitle">This screen is still under construction. This sample will help you learn about adaptive layouts in Jetpack Compose</string>
+
+    <string name="back_button">Back</string>
+    <string name="more_options_button">More options</string>
+    <string name="messages">Messages</string>
+    <string name="four_hours_ago">4 hrs ago</string>
+</resources>

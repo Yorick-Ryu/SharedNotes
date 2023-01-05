@@ -1,15 +1,15 @@
 package com.yorick.sharednotes
 
 import android.os.Bundle
-import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.MaterialTheme
+import com.yorick.sharednotes.ui.theme.SharedNotesTheme
+import moe.tlaster.precompose.lifecycle.PreComposeActivity
+import moe.tlaster.precompose.lifecycle.setContent
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : PreComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
+            SharedNotesTheme {
                 App()
             }
         }

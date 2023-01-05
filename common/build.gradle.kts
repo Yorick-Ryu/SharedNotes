@@ -1,9 +1,8 @@
-import org.jetbrains.compose.compose
-
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("com.android.library")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 group = "com.yorick"
@@ -29,10 +28,12 @@ kotlin {
                 api(compose.runtime)
                 api(compose.animation)
                 api(compose.material3)
+                api(compose.material)
                 api(compose.materialIconsExtended)
                 api(compose.foundation)
                 implementation("com.mikepenz:multiplatform-markdown-renderer:0.6.1")
                 api("moe.tlaster:precompose:1.3.13")
+                api("dev.icerock.moko:resources:0.20.1")
             }
         }
 
@@ -40,6 +41,8 @@ kotlin {
             dependencies {
                 api("androidx.appcompat:appcompat:1.5.1")
                 api("androidx.core:core-ktx:1.9.0")
+                implementation("androidx.compose.material3:material3:1.1.0-alpha03")
+                implementation("androidx.compose.material3:material3-window-size-class:1.1.0-alpha03")
             }
         }
 
@@ -63,4 +66,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.yorick.sharednotes"
 }
