@@ -48,7 +48,6 @@ fun SharedNotesSearchBar(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SharedNotesTopBar(
     title: String,
@@ -67,7 +66,7 @@ fun SharedNotesTopBar(
     }
 ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             if (isFullScreen) {
