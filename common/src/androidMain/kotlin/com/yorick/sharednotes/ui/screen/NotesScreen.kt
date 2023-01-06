@@ -1,9 +1,6 @@
 package com.yorick.sharednotes.ui.screen
 
-import androidx.activity.compose.BackHandler
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -23,6 +20,7 @@ import com.yorick.sharednotes.R
 import com.yorick.sharednotes.ui.components.UIState
 import com.yorick.sharednotes.ui.note.NoteDetailScreen
 import com.yorick.sharednotes.ui.note.NoteListScreen
+import com.yorick.sharednotes.ui.note.NotesSinglePaneContent
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 import com.yorick.sharednotes.ui.utils.SharedNotesNavigationType
 
@@ -92,45 +90,6 @@ fun NoteScreen(
                         modifier = Modifier.size(28.dp)
                     )
                 }
-            }
-        }
-    }
-}
-
-@Composable
-fun NotesSinglePaneContent(
-    modifier: Modifier = Modifier,
-    notesUIState: UIState,
-    noteLazyListState: LazyListState,
-    closeDetailScreen: () -> Unit,
-    navigateToDetail: (Long, SharedNotesContentType) -> Unit,
-    addNote: () -> Unit,
-    tagsGrid: @Composable () -> Unit = {},
-) {
-    Crossfade(
-        targetState = notesUIState.selectedNote != null && notesUIState.isDetailOnlyOpen
-    ) { screen ->
-        when (screen) {
-            true -> {
-                BackHandler {
-                    closeDetailScreen()
-                }
-                notesUIState.selectedNote?.let {
-                    NoteDetailScreen(
-                        note = it,
-                        addNote = addNote,
-                        onBackPressed = { closeDetailScreen() }
-                    )
-                }
-            }
-            false -> {
-                NoteListScreen(
-                    notes = notesUIState.notes,
-                    noteLazyListState = noteLazyListState,
-                    modifier = modifier,
-                    navigateToDetail = navigateToDetail,
-                    tagsGrid = tagsGrid,
-                )
             }
         }
     }

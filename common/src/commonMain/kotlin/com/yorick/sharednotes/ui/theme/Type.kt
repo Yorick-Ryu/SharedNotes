@@ -8,26 +8,26 @@ import androidx.compose.ui.unit.sp
 val sharedNotesTypography = Typography(
     displayLarge = TextStyle(
         fontWeight = FontWeight.SemiBold,
-        fontSize = 44.sp,
-        lineHeight = 52.sp,
+        fontSize = 42.sp,
+        lineHeight = 50.sp,
         letterSpacing = 0.sp
     ),
     displayMedium = TextStyle(
         fontWeight = FontWeight.SemiBold,
-        fontSize = 40.sp,
+        fontSize = 42.sp,
         lineHeight = 48.sp,
         letterSpacing = 0.sp
     ),
     displaySmall = TextStyle(
         fontWeight = FontWeight.SemiBold,
-        fontSize = 36.sp,
-        lineHeight = 44.sp,
+        fontSize = 38.sp,
+        lineHeight = 46.sp,
         letterSpacing = 0.sp
     ),
     headlineLarge = TextStyle(
         fontWeight = FontWeight.SemiBold,
-        fontSize = 32.sp,
-        lineHeight = 40.sp,
+        fontSize = 34.sp,
+        lineHeight = 42.sp,
         letterSpacing = 0.sp
     ),
     headlineMedium = TextStyle(

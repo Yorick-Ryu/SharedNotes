@@ -44,7 +44,7 @@ fun EditScreen(
     if (isOpenNoteInfoDialog) {
         NewNoteAlertDialog(
             modifier = Modifier,
-            onDismissRequest = onDismissRequest,
+            onDismissRequest = onConfirmClose,
             onConfirm = onConfirm,
             title = title,
             onSubjectValueChange = onSubjectValueChange,

@@ -2,6 +2,8 @@ package com.yorick.sharednotes.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
@@ -11,14 +13,15 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 
 @Composable
 actual fun SharedNotesDropDownMenu(
     modifier: Modifier,
-    label: String ,
+    label: String,
     menuList: List<String>,
-){
+) {
     var expanded by remember {
         mutableStateOf(false)
     }
@@ -33,6 +36,7 @@ actual fun SharedNotesDropDownMenu(
             onValueChange = {
                 category = it
             },
+            singleLine = true,
             enabled = true,
             trailingIcon = {
                 IconButton(onClick = {
@@ -48,6 +52,21 @@ actual fun SharedNotesDropDownMenu(
                 Text(text = label)
             }
         )
-
+        DropdownMenu(
+            modifier = Modifier,
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            offset = DpOffset(0.dp, 0.dp),
+        ) {
+            for (menu in menuList) {
+                DropdownMenuItem(
+                    content = { Text(text = menu) },
+                    onClick = {
+                        category = menu
+                        expanded = false
+                    },
+                )
+            }
+        }
     }
 }

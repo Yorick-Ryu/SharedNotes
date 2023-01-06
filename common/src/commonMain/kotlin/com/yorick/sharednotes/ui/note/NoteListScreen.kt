@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -59,7 +58,7 @@ fun NoteDetailScreen(
             isFullScreen = isFullScreen,
             onBackPressed = onBackPressed
         ) {
-            if (!isFullScreen) {
+//            if (!isFullScreen) {
                 IconButton(onClick = addNote) {
                     Icon(
                         imageVector = Icons.Default.Edit,
@@ -67,15 +66,15 @@ fun NoteDetailScreen(
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-            } else {
-                IconButton(onClick = { }) {
-                    Icon(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "More",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
+//            } else {
+//                IconButton(onClick = { }) {
+//                    Icon(
+//                        imageVector = Icons.Default.MoreVert,
+//                        contentDescription = "More",
+//                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+//                    )
+//                }
+//            }
         }
         NoteContent(noteBody = note.body)
     }

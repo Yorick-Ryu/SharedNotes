@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.NoteAdd
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -56,9 +56,8 @@ fun SharedNotesNavigationRail(
                         contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Edit,
+                            imageVector = Icons.Outlined.NoteAdd,
                             contentDescription = "Edit",
-                            modifier = Modifier.size(18.dp)
                         )
                     }
                     Spacer(Modifier.height(8.dp)) // NavigationRailHeaderPadding

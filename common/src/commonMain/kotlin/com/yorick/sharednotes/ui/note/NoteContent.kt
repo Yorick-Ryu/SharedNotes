@@ -24,6 +24,7 @@ fun NoteContent(
         Markdown(
             content = noteBody,
             colors = MarkdownDefaults.markdownColors(
+                backgroundColor= MaterialTheme.colorScheme.background,
                 codeBackgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                 textColor = MaterialTheme.colorScheme.onSurface
             ),

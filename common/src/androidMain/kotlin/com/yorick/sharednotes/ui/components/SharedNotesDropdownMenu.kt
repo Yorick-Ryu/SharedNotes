@@ -32,6 +32,7 @@ actual fun SharedNotesDropDownMenu(
             onValueChange = {
                 category = it
             },
+            singleLine = true,
             enabled = true,
             trailingIcon = {
                 IconButton(onClick = {

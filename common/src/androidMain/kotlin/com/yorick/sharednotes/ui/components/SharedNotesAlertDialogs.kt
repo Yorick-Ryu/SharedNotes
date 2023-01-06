@@ -84,6 +84,11 @@ actual fun NewNoteAlertDialog(
                 Text(text = "OK")
             }
         },
+        dismissButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text(text = "Cancel")
+            }
+        },
         properties = DialogProperties(
             dismissOnBackPress = false,
             dismissOnClickOutside = false
