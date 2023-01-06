@@ -1,9 +1,6 @@
 package com.yorick.sharednotes
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import com.google.accompanist.adaptive.calculateDisplayFeatures
@@ -14,14 +11,11 @@ import com.yorick.sharednotes.ui.edit.EditViewModel
 import com.yorick.sharednotes.ui.note.NotesViewModel
 import com.yorick.sharednotes.ui.tag.TagsViewModel
 import com.yorick.sharednotes.ui.theme.SharedNotesTheme
+import moe.tlaster.precompose.lifecycle.PreComposeActivity
+import moe.tlaster.precompose.lifecycle.setContent
+import moe.tlaster.precompose.ui.viewModel
 
-class MainActivity : ComponentActivity() {
-
-    private val notesViewModel: NotesViewModel by viewModels()
-    private val contactsViewModel: ContactsViewModel by viewModels()
-    private val categoriesViewModel: CategoriesViewModel by viewModels()
-    private val tagsViewModel: TagsViewModel by viewModels()
-    private val editViewModel: EditViewModel by viewModels()
+class MainActivity : PreComposeActivity() {
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +25,12 @@ class MainActivity : ComponentActivity() {
             SharedNotesTheme {
                 val windowSize = calculateWindowSizeClass(this)
                 val displayFeatures = calculateDisplayFeatures(this)
+
+                val notesViewModel = viewModel { NotesViewModel() }
+                val editViewModel = viewModel { EditViewModel() }
+                val contactsViewModel = viewModel { ContactsViewModel() }
+                val categoriesViewModel = viewModel { CategoriesViewModel() }
+                val tagsViewModel = viewModel { TagsViewModel() }
 
                 SharedNotesApp(
                     windowSize = windowSize,

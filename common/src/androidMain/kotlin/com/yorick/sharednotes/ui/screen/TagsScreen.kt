@@ -1,9 +1,10 @@
-package com.yorick.sharednotes.ui.tag
+package com.yorick.sharednotes.ui.screen
 
 import androidx.compose.runtime.Composable
 import androidx.window.layout.DisplayFeature
 import com.yorick.sharednotes.ui.components.UIState
-import com.yorick.sharednotes.ui.note.NoteScreen
+import com.yorick.sharednotes.ui.tag.TagsGrid
+import com.yorick.sharednotes.ui.tag.TagsUIState
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 import com.yorick.sharednotes.ui.utils.SharedNotesNavigationType
 

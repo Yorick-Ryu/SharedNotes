@@ -1,4 +1,4 @@
-package com.yorick.sharednotes.ui.category
+package com.yorick.sharednotes.ui.screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.Crossfade
@@ -13,6 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.window.layout.DisplayFeature
 import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
 import com.google.accompanist.adaptive.TwoPane
+import com.yorick.sharednotes.ui.category.CategoriesListScreen
+import com.yorick.sharednotes.ui.category.CategoriesUIState
+import com.yorick.sharednotes.ui.category.CategoryNotesScreen
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 
 @Composable

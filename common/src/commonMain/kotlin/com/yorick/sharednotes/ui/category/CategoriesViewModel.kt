@@ -1,7 +1,5 @@
 package com.yorick.sharednotes.ui.category
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.yorick.sharednotes.data.repository.CategoriesRepository
 import com.yorick.sharednotes.data.repository.CategoriesRepositoryImpl
 import com.yorick.sharednotes.data.repository.NotesRepository
@@ -11,6 +9,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import moe.tlaster.precompose.viewmodel.ViewModel
+import moe.tlaster.precompose.viewmodel.viewModelScope
 
 class CategoriesViewModel(
     private val categoriesRepository: CategoriesRepository = CategoriesRepositoryImpl(),

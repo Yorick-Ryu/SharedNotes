@@ -122,7 +122,7 @@ fun SharedNotesNavigationWrapper(
     navigationContentPosition: SharedNotesNavigationContentPosition,
     notesViewModel: NotesViewModel,
     contactsViewModel: ContactsViewModel,
-    categoriesViewModel :CategoriesViewModel,
+    categoriesViewModel : CategoriesViewModel,
     tagsViewModel: TagsViewModel,
     editViewModel: EditViewModel
 ) {

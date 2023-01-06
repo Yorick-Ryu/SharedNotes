@@ -1,8 +1,6 @@
 package com.yorick.sharednotes.ui.contact
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.yorick.sharednotes.data.model.Account
+
 import com.yorick.sharednotes.data.repository.AccountsRepository
 import com.yorick.sharednotes.data.repository.AccountsRepositoryImpl
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
@@ -10,6 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import moe.tlaster.precompose.viewmodel.ViewModel
+import moe.tlaster.precompose.viewmodel.viewModelScope
 
 class ContactsViewModel(
     private val accountsRepository: AccountsRepository = AccountsRepositoryImpl()

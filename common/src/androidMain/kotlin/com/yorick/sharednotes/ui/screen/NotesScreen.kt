@@ -1,4 +1,4 @@
-package com.yorick.sharednotes.ui.note
+package com.yorick.sharednotes.ui.screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.Crossfade
@@ -21,6 +21,8 @@ import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
 import com.google.accompanist.adaptive.TwoPane
 import com.yorick.sharednotes.R
 import com.yorick.sharednotes.ui.components.UIState
+import com.yorick.sharednotes.ui.note.NoteDetailScreen
+import com.yorick.sharednotes.ui.note.NoteListScreen
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 import com.yorick.sharednotes.ui.utils.SharedNotesNavigationType
 

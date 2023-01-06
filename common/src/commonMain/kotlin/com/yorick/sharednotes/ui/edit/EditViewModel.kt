@@ -1,22 +1,17 @@
 package com.yorick.sharednotes.ui.edit
 
-
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusRequester
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.yorick.sharednotes.data.model.Account
-import com.yorick.sharednotes.data.model.Category
 import com.yorick.sharednotes.data.model.Note
-import com.yorick.sharednotes.data.model.Tag
 import com.yorick.sharednotes.data.repository.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import moe.tlaster.precompose.viewmodel.ViewModel
+import moe.tlaster.precompose.viewmodel.viewModelScope
 
 class EditViewModel(
     private val notesRepository: NotesRepository = NotesRepositoryImpl(),
@@ -140,7 +135,6 @@ class EditViewModel(
     }
 
     fun onConfirm() {
-        Log.d("yu", "onConfirm: ")
         if (noteSubject != "") {
             isNoteInfoDialogOpen = false
         } else {
@@ -161,7 +155,6 @@ class EditViewModel(
     }
 
     fun onBackPress() {
-        Log.d("TAG", "onBackPress: ")
         isSaveDialogOpen = true
     }
 
