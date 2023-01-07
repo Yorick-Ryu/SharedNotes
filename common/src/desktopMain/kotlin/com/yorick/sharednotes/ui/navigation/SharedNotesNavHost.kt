@@ -1,17 +1,22 @@
 package com.yorick.sharednotes.ui.navigation
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.window.WindowState
+import com.yorick.sharednotes.ui.category.CategoriesUIState
 import com.yorick.sharednotes.ui.category.CategoriesViewModel
+import com.yorick.sharednotes.ui.contact.ContactsUIState
 import com.yorick.sharednotes.ui.contact.ContactsViewModel
 import com.yorick.sharednotes.ui.edit.EditScreen
 import com.yorick.sharednotes.ui.edit.EditViewModel
 import com.yorick.sharednotes.ui.note.NotesUIState
 import com.yorick.sharednotes.ui.note.NotesViewModel
+import com.yorick.sharednotes.ui.screen.CategoriesScreen
+import com.yorick.sharednotes.ui.screen.ContactsScreen
 import com.yorick.sharednotes.ui.screen.NotesScreen
+import com.yorick.sharednotes.ui.screen.TagsScreen
+import com.yorick.sharednotes.ui.tag.TagsUIState
 import com.yorick.sharednotes.ui.tag.TagsViewModel
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 import kotlinx.coroutines.CoroutineScope
@@ -59,8 +64,7 @@ fun SharedNotesNavHost(
         ) {
             NotesScreen(
                 windowState = windowState,
-                notesUIState = notesUIState ?: NotesUIState(error = "error"),
-                contentType = contentType,
+                notesUIState = notesUIState ?: NotesUIState(error = "Error!"),
                 addNote = addNote,
                 navigateToDetail = { noteId, pane ->
                     notesViewModel.setSelectedNote(noteId, pane)
@@ -73,17 +77,43 @@ fun SharedNotesNavHost(
         scene(
             route = SharedNotesRoute.CONTACTS
         ) {
-            Text(text = "CATEGORIES")
+            ContactsScreen(
+                contactsUIState = contactsUIState ?: ContactsUIState(error = "Error!"),
+                windowState = windowState,
+                closeDetailScreen = {
+                    contactsViewModel.closeDetailScreen()
+                },
+                navigateToDetail = { accountId, pane ->
+                    contactsViewModel.setSelectedAccount(accountId, pane)
+                }
+            )
         }
         scene(
             route = SharedNotesRoute.CATEGORIES
         ) {
-
+            CategoriesScreen(
+                categoriesUIState = categoriesUIState ?: CategoriesUIState(error = "Error!"),
+                windowState = windowState,
+                closeDetailScreen = { categoriesViewModel.closeDetailScreen() },
+                navigateToDetail = { categoryId, pane ->
+                    categoriesViewModel.setSelectedCategory(categoryId, pane)
+                }
+            )
         }
         scene(
             route = SharedNotesRoute.TAGS
         ) {
-
+            TagsScreen(
+                windowState = windowState,
+                tagsUIState = tagsUIState ?: TagsUIState(error = "Error!"),
+                addNote = addNote,
+                closeDetailScreen = {
+                    tagsViewModel.closeDetailScreen()
+                },
+                navigateToDetail = { noteId, pane ->
+                    tagsViewModel.setSelectedNote(noteId, pane)
+                },
+            )
         }
         scene(
             route = EditDestination.routeWithArg

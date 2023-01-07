@@ -61,7 +61,7 @@ fun NoteScreen(
                     addNote = addNote
                 )
             },
-            strategy = HorizontalTwoPaneStrategy(splitFraction = 0.5f, gapWidth = 16.dp),
+            strategy = HorizontalTwoPaneStrategy(splitFraction = 0.5f, gapWidth = 0.dp),
             displayFeatures = displayFeatures
         )
     } else {

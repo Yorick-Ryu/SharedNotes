@@ -3,37 +3,30 @@ package com.yorick.sharednotes.ui.screen
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.window.layout.DisplayFeature
-import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
-import com.google.accompanist.adaptive.TwoPane
+import androidx.compose.ui.window.WindowState
 import com.yorick.sharednotes.ui.category.CategoriesListScreen
 import com.yorick.sharednotes.ui.category.CategoriesSinglePaneContent
 import com.yorick.sharednotes.ui.category.CategoriesUIState
 import com.yorick.sharednotes.ui.category.CategoryNotesScreen
+import com.yorick.sharednotes.ui.components.SharedNotesTwoPane
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 
 @Composable
 fun CategoriesScreen(
     modifier: Modifier = Modifier,
     categoriesUIState: CategoriesUIState,
-    contentType: SharedNotesContentType,
+    windowState: WindowState,
     closeDetailScreen: () -> Unit,
-    displayFeatures: List<DisplayFeature>,
     navigateToDetail: (Long, SharedNotesContentType) -> Unit,
 ) {
-    LaunchedEffect(key1 = contentType) {
-        if ((contentType == SharedNotesContentType.SINGLE_PANE) && !categoriesUIState.isDetailOnlyOpen) {
-            closeDetailScreen()
-        }
-    }
     val categoryLazyListState = rememberLazyListState()
     val noteLazyListState = rememberLazyListState()
 
-    if (contentType == SharedNotesContentType.DUAL_PANE) {
-        TwoPane(
+    if (windowState.size.width > 850.dp) {
+        SharedNotesTwoPane(
+            modifier = modifier,
             first = {
                 CategoriesListScreen(
                     modifier = modifier,
@@ -50,13 +43,11 @@ fun CategoriesScreen(
                     onBackPressed = closeDetailScreen,
                     navigateToDetail = { _, _ -> }
                 )
-            },
-            strategy = HorizontalTwoPaneStrategy(splitFraction = 0.5f, gapWidth = 0.dp),
-            displayFeatures = displayFeatures
+            }
         )
     } else {
         CategoriesSinglePaneContent(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             categoriesUIState = categoriesUIState,
             categoryLazyListState = categoryLazyListState,
             noteLazyListState = noteLazyListState,

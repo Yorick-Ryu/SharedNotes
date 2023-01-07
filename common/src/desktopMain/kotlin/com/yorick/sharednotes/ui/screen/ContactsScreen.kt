@@ -1,15 +1,12 @@
 package com.yorick.sharednotes.ui.screen
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.window.layout.DisplayFeature
-import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
-import com.google.accompanist.adaptive.TwoPane
+import androidx.compose.ui.window.WindowState
+import com.yorick.sharednotes.ui.components.SharedNotesTwoPane
 import com.yorick.sharednotes.ui.contact.ContactDetailScreen
 import com.yorick.sharednotes.ui.contact.ContactListScreen
 import com.yorick.sharednotes.ui.contact.ContactsSinglePaneContent
@@ -20,20 +17,14 @@ import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 fun ContactsScreen(
     modifier: Modifier = Modifier,
     contactsUIState: ContactsUIState,
-    contentType: SharedNotesContentType,
+    windowState: WindowState,
     closeDetailScreen: () -> Unit,
-    displayFeatures: List<DisplayFeature>,
     navigateToDetail: (Long, SharedNotesContentType) -> Unit
 ) {
-    LaunchedEffect(key1 = contentType) {
-        if ((contentType == SharedNotesContentType.SINGLE_PANE) && !contactsUIState.isDetailOnlyOpen) {
-            closeDetailScreen()
-        }
-    }
     val contactLazyListState = rememberLazyListState()
-
-    if (contentType == SharedNotesContentType.DUAL_PANE) {
-        TwoPane(
+    if (windowState.size.width > 850.dp) {
+        SharedNotesTwoPane(
+            modifier = modifier,
             first = {
                 ContactListScreen(
                     accounts = contactsUIState.accounts,
@@ -46,19 +37,15 @@ fun ContactsScreen(
                     account = contactsUIState.selectedAccount ?: contactsUIState.accounts.first(),
                     isFullScreen = false
                 )
-            },
-            strategy = HorizontalTwoPaneStrategy(splitFraction = 0.5f, gapWidth = 0.dp),
-            displayFeatures = displayFeatures
+            }
         )
     } else {
-        Box(modifier = modifier.fillMaxSize()) {
-            ContactsSinglePaneContent(
-                modifier = Modifier.fillMaxSize(),
-                contactsUIState = contactsUIState,
-                contactLazyListState = contactLazyListState,
-                closeDetailScreen = closeDetailScreen,
-                navigateToDetail = navigateToDetail
-            )
-        }
+        ContactsSinglePaneContent(
+            modifier = modifier.fillMaxSize(),
+            contactsUIState = contactsUIState,
+            contactLazyListState = contactLazyListState,
+            closeDetailScreen = closeDetailScreen,
+            navigateToDetail = navigateToDetail
+        )
     }
 }
