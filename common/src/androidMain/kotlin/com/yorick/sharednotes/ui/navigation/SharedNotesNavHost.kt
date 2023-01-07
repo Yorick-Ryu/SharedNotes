@@ -11,15 +11,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.window.layout.DisplayFeature
-import com.yorick.sharednotes.ui.screen.CategoriesScreen
 import com.yorick.sharednotes.ui.category.CategoriesViewModel
-import com.yorick.sharednotes.ui.screen.ContactsScreen
 import com.yorick.sharednotes.ui.contact.ContactsViewModel
-import com.yorick.sharednotes.ui.edit.EditScreen
 import com.yorick.sharednotes.ui.edit.EditViewModel
-import com.yorick.sharednotes.ui.screen.NoteScreen
 import com.yorick.sharednotes.ui.note.NotesViewModel
-import com.yorick.sharednotes.ui.screen.TagsScreen
+import com.yorick.sharednotes.ui.screen.*
 import com.yorick.sharednotes.ui.tag.TagsViewModel
 import com.yorick.sharednotes.ui.utils.InputKeyWordsUtil
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
@@ -128,6 +124,8 @@ fun SharedNotesNavHost(
 
             EditScreen(
                 modifier = Modifier.imePadding().systemBarsPadding(),
+                contentType = contentType,
+                displayFeatures = displayFeatures,
                 title = editViewModel.noteSubject,
                 text = editViewModel.noteBody,
                 categories = editUIState.categories.map { it.name },
@@ -140,13 +138,17 @@ fun SharedNotesNavHost(
                 onSubjectValueChange = { editViewModel.onSubjectValueChange(it) },
                 onConfirm = { editViewModel.onConfirm() },
                 onConfirmClose = {
-                    editViewModel.isSaveDialogOpen = false
-                    editViewModel.editingNote = null
-                    editViewModel.noteSubject = ""
-                    editViewModel.noteBody = ""
+                    editViewModel.clearAll()
                     navController.popBackStack()
                 },
-                onDismissRequest = { editViewModel.isNoteInfoDialogOpen = false },
+                onDismissRequest = {
+                    if (editViewModel.noteSubject == "") {
+                        editViewModel.clearAll()
+                        navController.popBackStack()
+                    } else {
+                        editViewModel.isNoteInfoDialogOpen = false
+                    }
+                },
                 onDismissSaveRequest = { editViewModel.isSaveDialogOpen = false },
                 onModeChanged = { editViewModel.modeChange() },
                 onClickedTextButton = { char ->

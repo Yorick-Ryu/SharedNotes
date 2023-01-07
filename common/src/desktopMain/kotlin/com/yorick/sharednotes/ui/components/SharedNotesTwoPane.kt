@@ -13,12 +13,12 @@ fun SharedNotesTwoPane(
     second: @Composable () -> Unit,
 ) {
     Row(
-        modifier = modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Column(modifier = Modifier.weight(1f)) {
             first()
         }
-        Column(modifier = Modifier.weight(1.6f)) {
+        Column(modifier = modifier.weight(1.6f)) {
             second()
         }
     }

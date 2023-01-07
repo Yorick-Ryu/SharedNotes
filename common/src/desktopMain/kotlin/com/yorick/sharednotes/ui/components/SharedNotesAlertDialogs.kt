@@ -1,18 +1,17 @@
 package com.yorick.sharednotes.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -45,7 +44,8 @@ actual fun SaveNoteAlertDialog(
                 Text(text = "Confirm")
             }
         },
-        size = DpSize(360.dp, 200.dp)
+        size = DpSize(360.dp, 200.dp),
+        onConfirm = onConfirm,
     )
 }
 
@@ -94,13 +94,16 @@ actual fun NewNoteAlertDialog(
                 Text(text = "Cancel")
             }
         },
+        onConfirm = onConfirm,
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SharedNotesDialog(
     modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit,
+    onConfirm: () -> Unit,
     title: String,
     text: @Composable () -> Unit,
     confirmButton: @Composable () -> Unit = {},
@@ -116,38 +119,59 @@ fun SharedNotesDialog(
             position = WindowPosition(Alignment.Center),
             size = size
         ),
-        resizable = false
+        resizable = false,
+        onKeyEvent = { keyEvent ->
+            when {
+                (keyEvent.key == Key.Enter && keyEvent.type == KeyEventType.KeyUp)
+                -> {
+                    onConfirm()
+                    true
+                }
+
+                (keyEvent.key == Key.Escape && keyEvent.type == KeyEventType.KeyUp) -> {
+                    onDismissRequest()
+                    true
+                }
+
+                else -> {
+                    false
+                }
+            }
+        }
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize().padding(10.dp).verticalScroll(rememberScrollState())
-                .background(
-                    shape = MaterialTheme.shapes.extraLarge,
-                    color = MaterialTheme.colorScheme.secondaryContainer
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        Card(
+            modifier = Modifier.fillMaxSize().padding(10.dp),
+            elevation = CardDefaults.cardElevation(5.dp)
         ) {
-            Row(
-                modifier = modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 30.dp),
-            ) {
-                Text(
-                    text = title,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
             Column(
-                modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 30.dp)
+                modifier = Modifier.padding(horizontal = 30.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-                text()
-            }
-            Row(
-                modifier = modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 30.dp),
-                horizontalArrangement = Arrangement.End
-            ) {
-                dismissButton()
-                Spacer(modifier.size(10.dp))
-                confirmButton()
+                Row(
+                    modifier = modifier.fillMaxWidth()
+                        .padding(top = 20.dp),
+                ) {
+                    Text(
+                        text = title,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+                Column(
+                    modifier.fillMaxWidth().padding(vertical = 10.dp)
+                ) {
+                    text()
+                }
+                Row(
+                    modifier = modifier.fillMaxWidth()
+                        .padding(top = 10.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    dismissButton()
+                    Spacer(modifier.size(10.dp))
+                    confirmButton()
+                }
             }
         }
     }

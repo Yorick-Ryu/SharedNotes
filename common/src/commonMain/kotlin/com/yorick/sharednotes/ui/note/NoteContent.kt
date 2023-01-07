@@ -1,6 +1,9 @@
 package com.yorick.sharednotes.ui.note
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -18,13 +21,21 @@ fun NoteContent(
 ) {
     Column(
         modifier = modifier
-            .padding(horizontal = 10.dp)
+            .fillMaxSize()
+            .padding(horizontal = 10.dp, vertical = 10.dp)
+            .background(
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = MaterialTheme.shapes.large
+            )
             .verticalScroll(rememberScrollState())
+            .focusable()
     ) {
         Markdown(
+            // BUG:JVM ``` Flashback
+            modifier = modifier.padding(horizontal = 20.dp, vertical = 12.dp),
             content = noteBody,
             colors = MarkdownDefaults.markdownColors(
-                backgroundColor= MaterialTheme.colorScheme.background,
+                backgroundColor = MaterialTheme.colorScheme.background,
                 codeBackgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                 textColor = MaterialTheme.colorScheme.onSurface
             ),

@@ -24,7 +24,10 @@ fun SharedNotesBottomNavigationBar(
     selectedDestination: String,
     navigateToTopLevelDestination: (SharedNotesTopLevelDestination) -> Unit
 ) {
-    NavigationBar(modifier = Modifier.fillMaxWidth()) {
+    NavigationBar(
+        modifier = Modifier.fillMaxWidth().height(80.dp),
+        tonalElevation = 10.dp
+    ) {
         TOP_LEVEL_DESTINATIONS.forEach { sharedNotesDestination ->
             NavigationBarItem(
                 selected = selectedDestination == sharedNotesDestination.route,
@@ -34,7 +37,9 @@ fun SharedNotesBottomNavigationBar(
                         imageVector = sharedNotesDestination.selectedIcon,
                         contentDescription = sharedNotesDestination.iconText
                     )
-                }
+                },
+                label = { Text(text = sharedNotesDestination.iconText) },
+                alwaysShowLabel = false
             )
         }
     }

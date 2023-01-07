@@ -43,24 +43,6 @@ class EditViewModel(
         observerAccount()
     }
 
-    private fun addNewNoteInit() {
-        editingNote = Note(
-            id = -2L,
-            author = uiState.value.account!!,
-            subject = "",
-            body = "",
-            category = uiState.value.categories.first(),
-            tag = uiState.value.tags,
-            createdAt = "2 mim ago"
-        )
-        noteSubject = ""
-        noteBody = ""
-        editingNote = null
-        isSaveDialogOpen = false
-        isNoteInfoDialogOpen = true
-        isEditModeEnabled = true
-    }
-
     private fun observerNotes() {
         viewModelScope.launch {
             notesRepository.getAllNotes()
@@ -117,8 +99,29 @@ class EditViewModel(
         }
     }
 
-     fun onInit() {
+    private fun addNewNoteInit() {
+        editingNote = Note(
+            id = -2L,
+            author = uiState.value.account!!,
+            subject = "",
+            body = "",
+            category = uiState.value.categories.first(),
+            tag = uiState.value.tags,
+            createdAt = "2 mim ago"
+        )
+        clearAll()
+        isNoteInfoDialogOpen = true
+        isEditModeEnabled = true
+    }
 
+    fun clearAll() {
+        isSaveDialogOpen = false
+        noteSubject = ""
+        noteBody = ""
+        editingNote = null
+    }
+
+    fun onInit() {
         if (editingNote == null) {
             addNewNoteInit()
         } else {
@@ -161,7 +164,7 @@ class EditViewModel(
     fun save() {
         if (noteBody == "") {
         } else {
-
+            //TODO save
         }
     }
 }

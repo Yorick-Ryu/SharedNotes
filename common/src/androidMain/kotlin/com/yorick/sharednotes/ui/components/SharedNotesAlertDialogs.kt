@@ -6,9 +6,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 
@@ -40,7 +43,7 @@ actual fun SaveNoteAlertDialog(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 actual fun NewNoteAlertDialog(
     modifier: Modifier,
@@ -59,11 +62,34 @@ actual fun NewNoteAlertDialog(
             Text(text = "Note Info")
         },
         text = {
-            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState())
+            ) {
+                SideEffect {
+                    titleEditorFocus.requestFocus()
+                }
                 OutlinedTextField(
                     modifier = Modifier
                         .padding(vertical = 10.dp)
-                        .focusRequester(titleEditorFocus),
+                        .focusRequester(titleEditorFocus)
+                        .onPreviewKeyEvent { keyEvent ->
+                            when {
+                                (keyEvent.key == Key.Enter && keyEvent.type == KeyEventType.KeyUp)
+                                -> {
+                                    onConfirm()
+                                    true
+                                }
+
+                                (keyEvent.key == Key.Escape && keyEvent.type == KeyEventType.KeyUp) -> {
+                                    onDismissRequest()
+                                    true
+                                }
+
+                                else -> {
+                                    false
+                                }
+                            }
+                        },
                     value = title,
                     onValueChange = onSubjectValueChange,
                     label = { Text(text = "Note Title") },
@@ -81,7 +107,7 @@ actual fun NewNoteAlertDialog(
         },
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text(text = "OK")
+                Text(text = "Confirm")
             }
         },
         dismissButton = {
