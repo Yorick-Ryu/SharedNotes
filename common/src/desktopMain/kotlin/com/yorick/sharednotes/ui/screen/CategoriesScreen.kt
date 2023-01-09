@@ -1,5 +1,9 @@
 package com.yorick.sharednotes.ui.screen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -23,8 +27,13 @@ fun CategoriesScreen(
 ) {
     val categoryLazyListState = rememberLazyListState()
     val noteLazyListState = rememberLazyListState()
+    val isTwoPane: Boolean = windowState.size.width > 850.dp
 
-    if (windowState.size.width > 850.dp) {
+    AnimatedVisibility(
+        visible = isTwoPane,
+        enter = expandHorizontally(initialWidth = { it * 5 / 13 }),
+        exit = shrinkHorizontally(targetWidth = { it * 5 / 13 }) + fadeOut()
+    ) {
         SharedNotesTwoPane(
             modifier = modifier,
             first = {
@@ -45,7 +54,12 @@ fun CategoriesScreen(
                 )
             }
         )
-    } else {
+    }
+    AnimatedVisibility(
+        visible = !isTwoPane,
+        enter = expandHorizontally(initialWidth = { it * 5 / 13 }),
+        exit = shrinkHorizontally(targetWidth = { it * 5 / 13 })
+    ) {
         CategoriesSinglePaneContent(
             modifier = modifier.fillMaxSize(),
             categoriesUIState = categoriesUIState,

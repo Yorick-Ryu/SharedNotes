@@ -1,9 +1,9 @@
 package com.yorick.sharednotes.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
@@ -13,7 +13,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -30,7 +29,7 @@ import com.yorick.sharednotes.ui.edit.EditSinglePaneScreen
 import com.yorick.sharednotes.ui.note.NoteContent
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun EditScreen(
     modifier: Modifier = Modifier,
@@ -58,10 +57,8 @@ fun EditScreen(
 ) {
     AnimatedVisibility(
         visible = isOpenNoteInfoDialog,
-        enter = expandVertically(
-            expandFrom = Alignment.CenterVertically
-        ),
-        exit = shrinkVertically() + fadeOut()
+        enter = scaleIn(),
+        exit = scaleOut(),
     ) {
         NewNoteAlertDialog(
             modifier = Modifier,

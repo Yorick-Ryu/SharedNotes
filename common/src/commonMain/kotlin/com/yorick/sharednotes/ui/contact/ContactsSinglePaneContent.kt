@@ -1,6 +1,9 @@
 package com.yorick.sharednotes.ui.contact
 
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,27 +18,31 @@ fun ContactsSinglePaneContent(
     closeDetailScreen: () -> Unit,
     navigateToDetail: (Long, SharedNotesContentType) -> Unit
 ) {
-    Crossfade(
-        targetState = contactsUIState.selectedAccount != null && contactsUIState.isDetailOnlyOpen
-    ) { screen ->
-        when (screen) {
-            true -> {
-                BackHandler {
-                    closeDetailScreen()
-                }
-                contactsUIState.selectedAccount?.let {
-                    ContactDetailScreen(account = it) {
-                        closeDetailScreen()
-                    }
-                }
-            }
-            false -> {
-                ContactListScreen(
-                    accounts = contactsUIState.accounts,
-                    contactLazyListState = contactLazyListState,
-                    modifier = modifier,
-                    navigateToDetail = navigateToDetail
-                )
+    val detailVisibility: Boolean =
+        contactsUIState.selectedAccount != null && contactsUIState.isDetailOnlyOpen
+    AnimatedVisibility(
+        visible = !detailVisibility,
+        enter = slideInHorizontally(initialOffsetX = { -it }),
+        exit = slideOutHorizontally(targetOffsetX = { -it }) + fadeOut()
+    ) {
+        ContactListScreen(
+            accounts = contactsUIState.accounts,
+            contactLazyListState = contactLazyListState,
+            modifier = modifier,
+            navigateToDetail = navigateToDetail
+        )
+    }
+    AnimatedVisibility(
+        visible = detailVisibility,
+        enter = slideInHorizontally(initialOffsetX = { it }),
+        exit = slideOutHorizontally(targetOffsetX = { -it })
+    ) {
+        BackHandler {
+            closeDetailScreen()
+        }
+        contactsUIState.selectedAccount?.let {
+            ContactDetailScreen(account = it) {
+                closeDetailScreen()
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.yorick.sharednotes.ui.screen
 
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.*
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -13,7 +13,8 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -29,7 +30,7 @@ import com.yorick.sharednotes.ui.edit.EditContent
 import com.yorick.sharednotes.ui.edit.EditSinglePaneScreen
 import com.yorick.sharednotes.ui.note.NoteContent
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun EditScreen(
     modifier: Modifier = Modifier,
@@ -54,7 +55,11 @@ fun EditScreen(
     onBackPressed: () -> Unit = {},
     onClickTitle: () -> Unit = {},
 ) {
-    AnimatedVisibility(isOpenNoteInfoDialog) {
+    AnimatedVisibility(
+        visible = isOpenNoteInfoDialog,
+        enter = scaleIn(),
+        exit = scaleOut(),
+    ) {
         NewNoteAlertDialog(
             modifier = Modifier,
             onDismissRequest = onDismissRequest,
@@ -73,7 +78,12 @@ fun EditScreen(
             onConfirm = onConfirmClose,
         )
     }
-    if (windowState.size.width > 850.dp) {
+    val isTwoPane: Boolean = windowState.size.width > 850.dp
+    AnimatedVisibility(
+        visible = isTwoPane,
+        enter = expandHorizontally(initialWidth = { it / 2 }),
+        exit = shrinkHorizontally(targetWidth = { it / 2 }) + fadeOut()
+    ) {
         Column(
             modifier = modifier.fillMaxSize().onPreviewKeyEvent {
                 when {
@@ -131,7 +141,12 @@ fun EditScreen(
                 },
             )
         }
-    } else {
+    }
+    AnimatedVisibility(
+        visible = !isTwoPane,
+        enter = expandHorizontally(initialWidth = { it / 2 }),
+        exit = shrinkHorizontally(targetWidth = { it / 2 })
+    ) {
         EditSinglePaneScreen(
             modifier = modifier.fillMaxSize(),
             title = title,

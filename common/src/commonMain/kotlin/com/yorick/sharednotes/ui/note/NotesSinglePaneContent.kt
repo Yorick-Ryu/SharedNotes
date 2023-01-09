@@ -1,6 +1,9 @@
 package com.yorick.sharednotes.ui.note
 
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,31 +21,36 @@ fun NotesSinglePaneContent(
     addNote: () -> Unit,
     tagsGrid: @Composable () -> Unit = {},
 ) {
-    Crossfade(
-        targetState = notesUIState.selectedNote != null && notesUIState.isDetailOnlyOpen
-    ) { screen ->
-        when (screen) {
-            true -> {
-                BackHandler {
-                    closeDetailScreen()
-                }
-                notesUIState.selectedNote?.let {
-                    NoteDetailScreen(
-                        note = it,
-                        addNote = addNote,
-                        onBackPressed = { closeDetailScreen() }
-                    )
-                }
-            }
-            false -> {
-                NoteListScreen(
-                    notes = notesUIState.notes,
-                    noteLazyListState = noteLazyListState,
-                    modifier = modifier,
-                    navigateToDetail = navigateToDetail,
-                    tagsGrid = tagsGrid,
-                )
-            }
+    val detailVisibility: Boolean =
+        notesUIState.selectedNote != null && notesUIState.isDetailOnlyOpen
+
+    AnimatedVisibility(
+        visible = !detailVisibility,
+        enter = slideInHorizontally(initialOffsetX = { -it }),
+        exit = slideOutHorizontally(targetOffsetX = { -it })+ fadeOut()
+    ) {
+        NoteListScreen(
+            notes = notesUIState.notes,
+            noteLazyListState = noteLazyListState,
+            modifier = modifier,
+            navigateToDetail = navigateToDetail,
+            tagsGrid = tagsGrid,
+        )
+    }
+    AnimatedVisibility(
+        visible = detailVisibility,
+        enter = slideInHorizontally(initialOffsetX = { it }),
+        exit = slideOutHorizontally(targetOffsetX = { -it })
+    ) {
+        BackHandler {
+            closeDetailScreen()
+        }
+        notesUIState.selectedNote?.let {
+            NoteDetailScreen(
+                note = it,
+                addNote = addNote,
+                onBackPressed = { closeDetailScreen() }
+            )
         }
     }
 }

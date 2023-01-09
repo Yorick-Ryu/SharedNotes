@@ -1,8 +1,12 @@
 package com.yorick.sharednotes.ui.navigation
 
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.window.WindowState
 import com.yorick.sharednotes.ui.category.CategoriesUIState
 import com.yorick.sharednotes.ui.category.CategoriesViewModel
@@ -16,13 +20,12 @@ import com.yorick.sharednotes.ui.tag.TagsUIState
 import com.yorick.sharednotes.ui.tag.TagsViewModel
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import moe.tlaster.precompose.navigation.BackHandler
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.path
+import moe.tlaster.precompose.navigation.transition.NavTransition
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun SharedNotesNavHost(
     navigator: Navigator,
@@ -53,7 +56,13 @@ fun SharedNotesNavHost(
     }
     NavHost(
         navigator = navigator,
-        initialRoute = SharedNotesRoute.NOTES
+        initialRoute = SharedNotesRoute.NOTES,
+        navTransition = NavTransition(
+            createTransition = expandHorizontally(expandFrom = Alignment.Start),
+            destroyTransition = shrinkHorizontally(shrinkTowards = Alignment.Start)+fadeOut(),
+            resumeTransition = expandHorizontally(expandFrom = Alignment.Start),
+            pauseTransition = shrinkHorizontally(shrinkTowards = Alignment.Start)+ fadeOut(),
+        )
     ) {
         scene(
             route = SharedNotesRoute.NOTES

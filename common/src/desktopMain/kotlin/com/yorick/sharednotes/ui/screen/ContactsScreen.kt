@@ -1,5 +1,9 @@
 package com.yorick.sharednotes.ui.screen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -22,7 +26,13 @@ fun ContactsScreen(
     navigateToDetail: (Long, SharedNotesContentType) -> Unit
 ) {
     val contactLazyListState = rememberLazyListState()
-    if (windowState.size.width > 850.dp) {
+    val isTwoPane: Boolean = windowState.size.width > 850.dp
+
+    AnimatedVisibility(
+        visible = isTwoPane,
+        enter = expandHorizontally(initialWidth = { it * 5 / 13 }),
+        exit = shrinkHorizontally(targetWidth = { it * 5 / 13 }) + fadeOut()
+    ) {
         SharedNotesTwoPane(
             modifier = modifier,
             first = {
@@ -39,7 +49,12 @@ fun ContactsScreen(
                 )
             }
         )
-    } else {
+    }
+    AnimatedVisibility(
+        visible = !isTwoPane,
+        enter = expandHorizontally(initialWidth = { it * 5 / 13 }),
+        exit = shrinkHorizontally(targetWidth = { it * 5 / 13 })
+    ) {
         ContactsSinglePaneContent(
             modifier = modifier.fillMaxSize(),
             contactsUIState = contactsUIState,
