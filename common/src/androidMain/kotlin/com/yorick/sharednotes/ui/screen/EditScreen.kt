@@ -1,5 +1,9 @@
 package com.yorick.sharednotes.ui.screen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
@@ -9,6 +13,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -51,7 +56,13 @@ fun EditScreen(
     onBackPressed: () -> Unit = {},
     onClickTitle: () -> Unit = {},
 ) {
-    if (isOpenNoteInfoDialog) {
+    AnimatedVisibility(
+        visible = isOpenNoteInfoDialog,
+        enter = expandVertically(
+            expandFrom = Alignment.CenterVertically
+        ),
+        exit = shrinkVertically() + fadeOut()
+    ) {
         NewNoteAlertDialog(
             modifier = Modifier,
             onDismissRequest = onDismissRequest,
@@ -63,7 +74,8 @@ fun EditScreen(
             tags = tags
         )
     }
-    if (isOpenSaveDialog) {
+
+    AnimatedVisibility(isOpenSaveDialog) {
         SaveNoteAlertDialog(
             modifier = Modifier,
             onDismissRequest = onDismissSaveRequest,

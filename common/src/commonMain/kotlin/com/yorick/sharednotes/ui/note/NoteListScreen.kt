@@ -1,11 +1,13 @@
 package com.yorick.sharednotes.ui.note
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
@@ -51,6 +53,7 @@ fun NoteDetailScreen(
     isFullScreen: Boolean = true,
     onBackPressed: () -> Unit = {},
     addNote: () -> Unit = {},
+    stateVertical: ScrollState = rememberScrollState()
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         SharedNotesTopBar(
@@ -59,13 +62,13 @@ fun NoteDetailScreen(
             onBackPressed = onBackPressed
         ) {
 //            if (!isFullScreen) {
-                IconButton(onClick = addNote) {
-                    Icon(
-                        imageVector = Icons.Default.Edit,
-                        contentDescription = "Edit",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+            IconButton(onClick = addNote) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Edit",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
 //            } else {
 //                IconButton(onClick = { }) {
 //                    Icon(
@@ -76,6 +79,9 @@ fun NoteDetailScreen(
 //                }
 //            }
         }
-        NoteContent(noteBody = note.body)
+        NoteContent(
+            noteBody = note.body,
+            stateVertical = stateVertical
+        )
     }
 }

@@ -25,8 +25,7 @@ fun SharedNotesBottomNavigationBar(
     navigateToTopLevelDestination: (SharedNotesTopLevelDestination) -> Unit
 ) {
     NavigationBar(
-        modifier = Modifier.fillMaxWidth().height(80.dp),
-        tonalElevation = 10.dp
+        modifier = Modifier.fillMaxWidth().height(77.dp),
     ) {
         TOP_LEVEL_DESTINATIONS.forEach { sharedNotesDestination ->
             NavigationBarItem(

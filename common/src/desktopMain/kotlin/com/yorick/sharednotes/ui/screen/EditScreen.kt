@@ -1,14 +1,20 @@
 package com.yorick.sharednotes.ui.screen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -48,7 +54,7 @@ fun EditScreen(
     onBackPressed: () -> Unit = {},
     onClickTitle: () -> Unit = {},
 ) {
-    if (isOpenNoteInfoDialog) {
+    AnimatedVisibility(isOpenNoteInfoDialog) {
         NewNoteAlertDialog(
             modifier = Modifier,
             onDismissRequest = onDismissRequest,
@@ -60,7 +66,7 @@ fun EditScreen(
             tags = tags
         )
     }
-    if (isOpenSaveDialog) {
+    AnimatedVisibility(isOpenSaveDialog) {
         SaveNoteAlertDialog(
             modifier = Modifier,
             onDismissRequest = onDismissSaveRequest,
@@ -99,17 +105,29 @@ fun EditScreen(
                     )
                 }
             }
+            val noteStateVertical = rememberScrollState()
+            val editStateVertical = rememberScrollState()
             SharedNotesTwoPane(
                 modifier = Modifier.weight(1f),
                 first = {
                     EditContent(
                         text = text,
                         onBodyValueChange = onBodyValueChange,
-                        onClickedTextButton = onClickedTextButton
+                        onClickedTextButton = onClickedTextButton,
+                        stateVertical = editStateVertical
                     )
+                    // TODO VerticalScrollbar
                 },
                 second = {
-                    NoteContent(noteBody = text)
+                    NoteContent(
+                        noteBody = text,
+                        stateVertical = noteStateVertical
+                    )
+                    VerticalScrollbar(
+                        modifier = Modifier.align(Alignment.CenterEnd).padding(vertical = 10.dp)
+                            .fillMaxHeight(),
+                        adapter = rememberScrollbarAdapter(noteStateVertical)
+                    )
                 },
             )
         }

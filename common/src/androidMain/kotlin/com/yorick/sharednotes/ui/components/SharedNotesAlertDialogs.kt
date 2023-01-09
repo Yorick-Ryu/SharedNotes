@@ -61,6 +61,7 @@ actual fun NewNoteAlertDialog(
         title = {
             Text(text = "Note Info")
         },
+        tonalElevation = 5.dp,
         text = {
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())

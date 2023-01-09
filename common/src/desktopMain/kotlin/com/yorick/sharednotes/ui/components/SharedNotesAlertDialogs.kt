@@ -1,5 +1,6 @@
 package com.yorick.sharednotes.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -44,7 +45,7 @@ actual fun SaveNoteAlertDialog(
                 Text(text = "Confirm")
             }
         },
-        size = DpSize(360.dp, 200.dp),
+        size = DpSize(360.dp, 180.dp),
         onConfirm = onConfirm,
     )
 }
@@ -140,8 +141,13 @@ fun SharedNotesDialog(
         }
     ) {
         Card(
-            modifier = Modifier.fillMaxSize().padding(10.dp),
-            elevation = CardDefaults.cardElevation(5.dp)
+            modifier = Modifier.fillMaxSize().padding(12.dp),
+            shape = MaterialTheme.shapes.extraLarge,
+            border = BorderStroke(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.primary
+            ),
+            elevation = CardDefaults.cardElevation(6.dp),
         ) {
             Column(
                 modifier = Modifier.padding(horizontal = 30.dp),
@@ -159,7 +165,7 @@ fun SharedNotesDialog(
                     )
                 }
                 Column(
-                    modifier.fillMaxWidth().padding(vertical = 10.dp)
+                    modifier.fillMaxWidth().padding(top = 10.dp)
                 ) {
                     text()
                 }
