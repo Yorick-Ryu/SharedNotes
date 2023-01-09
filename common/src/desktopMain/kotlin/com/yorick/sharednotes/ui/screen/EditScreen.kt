@@ -1,6 +1,7 @@
 package com.yorick.sharednotes.ui.screen
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.LocalScrollbarStyle
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -136,7 +137,11 @@ fun EditScreen(
                     VerticalScrollbar(
                         modifier = Modifier.align(Alignment.CenterEnd).padding(vertical = 10.dp)
                             .fillMaxHeight(),
-                        adapter = rememberScrollbarAdapter(noteStateVertical)
+                        adapter = rememberScrollbarAdapter(noteStateVertical),
+                        style = LocalScrollbarStyle.current.copy(
+                            hoverColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            unhoverColor = MaterialTheme.colorScheme.surfaceVariant
+                        )
                     )
                 },
             )

@@ -1,6 +1,5 @@
 package com.yorick.sharednotes.ui.edit
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
@@ -45,7 +44,7 @@ fun EditContent(
                 .fillMaxSize()
                 .focusRequester(textEditorFocus)
                 .weight(1f)
-                .padding(horizontal = 20.dp, vertical = 12.dp)
+                .padding(horizontal = 20.dp).padding(top = 12.dp)
                 .scrollable(
                     orientation = Orientation.Horizontal,
                     state = stateVertical
@@ -61,7 +60,7 @@ fun EditContent(
             onValueChange = onBodyValueChange,
         )
         EditToolsBar(
-            modifier = Modifier.padding(5.dp),
+            modifier = Modifier.padding(horizontal = 5.dp),
             onClickedTextButton = onClickedTextButton
         )
     }
