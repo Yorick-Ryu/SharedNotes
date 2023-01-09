@@ -2,6 +2,7 @@ package com.yorick.sharednotes.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -149,34 +150,37 @@ fun SharedNotesDialog(
             ),
             elevation = CardDefaults.cardElevation(6.dp),
         ) {
-            Column(
-                modifier = Modifier.padding(horizontal = 30.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Row(
-                    modifier = modifier.fillMaxWidth()
-                        .padding(top = 20.dp),
-                ) {
-                    Text(
-                        text = title,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                }
+            Box {
+                WindowDraggableArea(modifier.fillMaxSize())
                 Column(
-                    modifier.fillMaxWidth().padding(top = 10.dp)
+                    modifier = Modifier.padding(horizontal = 30.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    text()
-                }
-                Row(
-                    modifier = modifier.fillMaxWidth()
-                        .padding(top = 10.dp),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    dismissButton()
-                    Spacer(modifier.size(10.dp))
-                    confirmButton()
+                    Row(
+                        modifier = modifier.fillMaxWidth()
+                            .padding(top = 20.dp),
+                    ) {
+                        Text(
+                            text = title,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                    }
+                    Column(
+                        modifier.fillMaxWidth().padding(top = 10.dp)
+                    ) {
+                        text()
+                    }
+                    Row(
+                        modifier = modifier.fillMaxWidth()
+                            .padding(top = 10.dp),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        dismissButton()
+                        Spacer(modifier.size(10.dp))
+                        confirmButton()
+                    }
                 }
             }
         }
