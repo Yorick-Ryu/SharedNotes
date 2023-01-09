@@ -3,10 +3,13 @@ package com.yorick.sharednotes.ui.navigation
 import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowState
 import com.yorick.sharednotes.ui.category.CategoriesUIState
 import com.yorick.sharednotes.ui.category.CategoriesViewModel
@@ -44,30 +47,35 @@ fun SharedNotesNavHost(
     val tagsUIState by tagsViewModel.uiState.collectAsState(null)
     val editUIState by editViewModel.uiState.collectAsState(null)
     val addNote = {
-        if (notesUIState?.selectedNote != null) {
-            val route =
-                "${EditDestination.route}?${EditDestination.noteId}=${notesUIState!!.selectedNote!!.id}"
-            navigator.navigate(route)
-            editViewModel.editingNote = notesUIState!!.selectedNote
-        } else {
-            navigator.navigate(EditDestination.route)
+        // 防止多次点击
+        if (editViewModel.noteSubject == "") {
+            if (notesUIState?.selectedNote != null) {
+                val route =
+                    "${EditDestination.route}?${EditDestination.noteId}=${notesUIState!!.selectedNote!!.id}"
+                navigator.navigate(route)
+                editViewModel.editingNote = notesUIState!!.selectedNote
+            } else {
+                navigator.navigate(EditDestination.route)
+            }
+            editViewModel.onInit()
         }
-        editViewModel.onInit()
     }
     NavHost(
+        modifier = Modifier,
         navigator = navigator,
         initialRoute = SharedNotesRoute.NOTES,
         navTransition = NavTransition(
             createTransition = expandHorizontally(expandFrom = Alignment.Start),
-            destroyTransition = shrinkHorizontally(shrinkTowards = Alignment.Start)+fadeOut(),
+            destroyTransition = shrinkHorizontally(shrinkTowards = Alignment.Start) + fadeOut(),
             resumeTransition = expandHorizontally(expandFrom = Alignment.Start),
-            pauseTransition = shrinkHorizontally(shrinkTowards = Alignment.Start)+ fadeOut(),
+            pauseTransition = shrinkHorizontally(shrinkTowards = Alignment.Start) + fadeOut(),
         )
     ) {
         scene(
             route = SharedNotesRoute.NOTES
         ) {
             NotesScreen(
+                modifier = Modifier.padding(end = 3.dp),
                 windowState = windowState,
                 notesUIState = notesUIState ?: NotesUIState(error = "Error!"),
                 addNote = addNote,
@@ -128,6 +136,7 @@ fun SharedNotesNavHost(
                 editViewModel.onBackPress()
             }
             EditScreen(
+                modifier = Modifier.padding(end = 3.dp),
                 windowState = windowState,
                 title = editViewModel.noteSubject,
                 text = editViewModel.noteBody,

@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.LocalScrollbarStyle
 import androidx.compose.foundation.VerticalScrollbar
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -37,6 +38,7 @@ fun NotesScreen(
 ) {
     val noteLazyListState = rememberLazyListState()
     val isTwoPane: Boolean = windowState.size.width > 850.dp
+    val stateVertical = rememberScrollState()
     AnimatedVisibility(
         visible = isTwoPane,
         enter = expandHorizontally(initialWidth = { it * 5 / 13 }),
@@ -53,7 +55,7 @@ fun NotesScreen(
                 )
             },
             second = {
-                val stateVertical = rememberScrollState()
+
                 NoteDetailScreen(
                     note = notesUIState.selectedNote ?: notesUIState.notes.first(),
                     isFullScreen = false,
@@ -80,15 +82,29 @@ fun NotesScreen(
         enter = expandHorizontally(initialWidth = { it * 5 / 13 }),
         exit = shrinkHorizontally(targetWidth = { it * 5 / 13 })
     ) {
-        NotesSinglePaneContent(
-            modifier = modifier.fillMaxSize(),
-            notesUIState = notesUIState,
-            noteLazyListState = noteLazyListState,
-            closeDetailScreen = closeDetailScreen,
-            navigateToDetail = navigateToDetail,
-            addNote = addNote,
-            tagsGrid = tagsGrid
-        )
+        Box(modifier.fillMaxSize()) {
+            VerticalScrollbar(
+                modifier = Modifier.align(Alignment.CenterEnd)
+                    .padding(vertical = 10.dp)
+                    .padding(top = 46.dp)
+                    .fillMaxHeight(),
+                adapter = rememberScrollbarAdapter(stateVertical),
+                style = LocalScrollbarStyle.current.copy(
+                    hoverColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    unhoverColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+            )
+            NotesSinglePaneContent(
+                modifier = modifier.fillMaxSize(),
+                notesUIState = notesUIState,
+                noteLazyListState = noteLazyListState,
+                closeDetailScreen = closeDetailScreen,
+                navigateToDetail = navigateToDetail,
+                addNote = addNote,
+                tagsGrid = tagsGrid,
+                stateVertical = stateVertical
+            )
+        }
     }
 
 

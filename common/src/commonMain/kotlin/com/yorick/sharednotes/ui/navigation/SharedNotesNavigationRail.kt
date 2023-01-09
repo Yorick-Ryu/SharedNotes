@@ -5,7 +5,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.NoteAdd
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +24,8 @@ fun SharedNotesNavigationRail(
     navigationContentPosition: SharedNotesNavigationContentPosition,
     navigateToTopLevelDestination: (SharedNotesTopLevelDestination) -> Unit,
     onDrawerClicked: () -> Unit = {},
-    addNote: () -> Unit
+    addNote: () -> Unit,
+    menuVisibility: Boolean = true
 ) {
     NavigationRail(
         modifier = Modifier.fillMaxHeight(),
@@ -35,33 +36,35 @@ fun SharedNotesNavigationRail(
             content = {
                 Column(
                     modifier = Modifier
-                        .layoutId(LayoutType.HEADER),
+                        .layoutId(LayoutType.HEADER).fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    NavigationRailItem(
-                        selected = false,
-                        onClick = onDrawerClicked,
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Default.Menu,
-                                contentDescription = "Navigation Drawer"
-                            )
-                        }
-                    )
+                    if (menuVisibility) {
+                        NavigationRailItem(
+                            selected = false,
+                            onClick = onDrawerClicked,
+                            icon = {
+                                Icon(
+                                    imageVector = Icons.Default.Menu,
+                                    contentDescription = "Navigation Drawer"
+                                )
+                            }
+                        )
+                    }
                     FloatingActionButton(
                         onClick = addNote,
-                        modifier = Modifier.padding(top = 0.dp, bottom = 0.dp),
+                        modifier = Modifier
+                            .padding(top = 10.dp, bottom = 0.dp)
+                            .align(Alignment.CenterHorizontally),
                         containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                         contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                     ) {
                         Icon(
-                            imageVector = Icons.Outlined.NoteAdd,
+                            imageVector = Icons.Outlined.Edit,
                             contentDescription = "Edit",
                         )
                     }
-                    Spacer(Modifier.height(8.dp)) // NavigationRailHeaderPadding
-                    Spacer(Modifier.height(4.dp)) // NavigationRailVerticalPadding
                 }
                 Column(
                     modifier = Modifier

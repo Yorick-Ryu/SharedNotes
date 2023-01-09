@@ -66,6 +66,7 @@ actual fun NewNoteAlertDialog(
         onDismissRequest = onDismissRequest,
         title = "Note Info",
         text = {
+            // BUG input issue
             OutlinedTextField(
                 modifier = Modifier
                     .padding(vertical = 10.dp)

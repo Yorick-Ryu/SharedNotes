@@ -4,7 +4,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.yorick.sharednotes.ui.components.UIState
@@ -20,6 +22,7 @@ fun NotesSinglePaneContent(
     navigateToDetail: (Long, SharedNotesContentType) -> Unit,
     addNote: () -> Unit,
     tagsGrid: @Composable () -> Unit = {},
+    stateVertical: ScrollState = rememberScrollState()
 ) {
     val detailVisibility: Boolean =
         notesUIState.selectedNote != null && notesUIState.isDetailOnlyOpen
@@ -27,7 +30,7 @@ fun NotesSinglePaneContent(
     AnimatedVisibility(
         visible = !detailVisibility,
         enter = slideInHorizontally(initialOffsetX = { -it }),
-        exit = slideOutHorizontally(targetOffsetX = { -it })+ fadeOut()
+        exit = slideOutHorizontally(targetOffsetX = { -it }) + fadeOut()
     ) {
         NoteListScreen(
             notes = notesUIState.notes,
@@ -49,7 +52,8 @@ fun NotesSinglePaneContent(
             NoteDetailScreen(
                 note = it,
                 addNote = addNote,
-                onBackPressed = { closeDetailScreen() }
+                onBackPressed = closeDetailScreen,
+                stateVertical = stateVertical
             )
         }
     }

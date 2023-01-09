@@ -48,8 +48,10 @@ fun SharedNotesDesktopApp(
     val selectedDestination = backStackEntry?.route?.route ?: SharedNotesRoute.NOTES
 
     val addNote = {
-        navigator.navigate(EditDestination.route)
-        editViewModel.onInit()
+        if (editViewModel.noteSubject == "") {
+            navigator.navigate(EditDestination.route)
+            editViewModel.onInit()
+        }
     }
 //    Column {
 //        Text(text = windowState.size.width.value.toString())
@@ -58,7 +60,7 @@ fun SharedNotesDesktopApp(
 //    }
     SharedNotesDesktopAppContent(
         navigator = navigator,
-        windowState=windowState,
+        windowState = windowState,
         navigationType = SharedNotesNavigationType.NAVIGATION_RAIL,
         contentType = contentType,
         selectedDestination = selectedDestination,
@@ -98,7 +100,8 @@ fun SharedNotesDesktopAppContent(
                 navigationContentPosition = navigationContentPosition,
                 navigateToTopLevelDestination = navigateToTopLevelDestination,
                 onDrawerClicked = { },
-                addNote = addNote
+                addNote = addNote,
+                menuVisibility = false
             )
         }
         Column(
@@ -108,7 +111,7 @@ fun SharedNotesDesktopAppContent(
         ) {
             SharedNotesNavHost(
                 navigator = navigator,
-                windowState=windowState,
+                windowState = windowState,
                 contentType = contentType,
                 notesViewModel = notesViewModel,
                 contactsViewModel = contactsViewModel,
