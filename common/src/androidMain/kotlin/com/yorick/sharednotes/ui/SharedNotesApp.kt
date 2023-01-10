@@ -36,7 +36,7 @@ fun SharedNotesApp(
     displayFeatures: List<DisplayFeature>,
     notesViewModel: NotesViewModel,
     contactsViewModel: ContactsViewModel,
-    categoriesViewModel : CategoriesViewModel,
+    categoriesViewModel: CategoriesViewModel,
     tagsViewModel: TagsViewModel,
     editViewModel: EditViewModel
 ) {
@@ -58,6 +58,7 @@ fun SharedNotesApp(
             navigationType = SharedNotesNavigationType.BOTTOM_NAVIGATION
             contentType = SharedNotesContentType.SINGLE_PANE
         }
+
         WindowWidthSizeClass.Medium -> {
             navigationType = SharedNotesNavigationType.NAVIGATION_RAIL
             contentType = if (foldingDevicePosture != DevicePosture.NormalPosture) {
@@ -66,6 +67,7 @@ fun SharedNotesApp(
                 SharedNotesContentType.SINGLE_PANE
             }
         }
+
         WindowWidthSizeClass.Expanded -> {
             navigationType = if (foldingDevicePosture is DevicePosture.BookPosture) {
                 SharedNotesNavigationType.NAVIGATION_RAIL
@@ -74,6 +76,7 @@ fun SharedNotesApp(
             }
             contentType = SharedNotesContentType.DUAL_PANE
         }
+
         else -> {
             navigationType = SharedNotesNavigationType.BOTTOM_NAVIGATION
             contentType = SharedNotesContentType.SINGLE_PANE
@@ -84,10 +87,12 @@ fun SharedNotesApp(
         WindowHeightSizeClass.Compact -> {
             SharedNotesNavigationContentPosition.TOP
         }
+
         WindowHeightSizeClass.Medium,
         WindowHeightSizeClass.Expanded -> {
             SharedNotesNavigationContentPosition.CENTER
         }
+
         else -> {
             SharedNotesNavigationContentPosition.TOP
         }
@@ -122,7 +127,7 @@ fun SharedNotesNavigationWrapper(
     navigationContentPosition: SharedNotesNavigationContentPosition,
     notesViewModel: NotesViewModel,
     contactsViewModel: ContactsViewModel,
-    categoriesViewModel : CategoriesViewModel,
+    categoriesViewModel: CategoriesViewModel,
     tagsViewModel: TagsViewModel,
     editViewModel: EditViewModel
 ) {

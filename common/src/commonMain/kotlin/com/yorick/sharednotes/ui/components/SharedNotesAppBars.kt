@@ -65,37 +65,37 @@ fun SharedNotesTopBar(
         }
     }
 ) {
-        Row(
-            modifier = modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            if (isFullScreen) {
-                IconButton(
-                    onClick = onBackPressed,
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-            Column(
-                modifier = Modifier,
-                horizontalAlignment = if (isFullScreen) Alignment.CenterHorizontally
-                else Alignment.Start
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        if (isFullScreen) {
+            IconButton(
+                onClick = onBackPressed,
             ) {
-                TextButton(onClick = { onClickTitle() }) {
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-            Row {
-                actions()
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
         }
+        Column(
+            modifier = Modifier,
+            horizontalAlignment = if (isFullScreen) Alignment.CenterHorizontally
+            else Alignment.Start
+        ) {
+            TextButton(onClick = { onClickTitle() }) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+        Row {
+            actions()
+        }
+    }
 }
 

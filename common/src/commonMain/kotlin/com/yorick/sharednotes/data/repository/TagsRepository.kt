@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface TagsRepository {
     fun getAllTags(): Flow<List<Tag>>
-    fun getTagById(id:Long):Flow<Tag>
+    fun getTagById(id: Long): Flow<Tag>
 }

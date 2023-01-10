@@ -7,5 +7,5 @@ interface UIState {
     val selectedNote: Note?
     val loading: Boolean
     val error: String?
-    val isDetailOnlyOpen:Boolean
+    val isDetailOnlyOpen: Boolean
 }
