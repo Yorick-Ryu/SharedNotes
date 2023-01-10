@@ -1,10 +1,7 @@
 package com.yorick.sharednotes.ui.components
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocalOffer
 import androidx.compose.material3.*
@@ -117,9 +114,10 @@ fun StaggeredGridBodyContent(
     tags: List<Tag>,
     rows: Int = 5,
     onClickChip: (Long) -> Unit,
+    stateHorizontal: ScrollState = rememberScrollState()
 ) {
     Row(
-        modifier = modifier.horizontalScroll(rememberScrollState()),
+        modifier = modifier.horizontalScroll(stateHorizontal),
         content = {
             StaggeredGrid(modifier = Modifier, rows = rows) {
                 for (tag in tags) {
