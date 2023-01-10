@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberDialogState
+import com.yorick.sharednotes.ui.edit.EditViewModel
 
 @Composable
 actual fun SaveNoteAlertDialog(
@@ -53,6 +54,7 @@ actual fun SaveNoteAlertDialog(
 
 @Composable
 actual fun NewNoteAlertDialog(
+    editViewModel: EditViewModel,
     modifier: Modifier,
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit,
@@ -60,19 +62,18 @@ actual fun NewNoteAlertDialog(
     title: String,
     categories: List<String>,
     tags: List<String>,
-    titleEditorFocus: FocusRequester
+    titleEditorFocus: FocusRequester,
 ) {
     SharedNotesDialog(
         onDismissRequest = onDismissRequest,
         title = "Note Info",
         text = {
-            // BUG input issue
             OutlinedTextField(
                 modifier = Modifier
                     .padding(vertical = 10.dp)
                     .focusRequester(titleEditorFocus),
-                value = title,
-                onValueChange = onSubjectValueChange,
+                value = editViewModel.noteSubject,
+                onValueChange = { editViewModel.noteSubject = it },
                 label = { Text(text = "Note Info") },
                 singleLine = true
             )

@@ -3,6 +3,7 @@ package com.yorick.sharednotes.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
+import com.yorick.sharednotes.ui.edit.EditViewModel
 
 @Composable
 expect fun SaveNoteAlertDialog(
@@ -13,6 +14,7 @@ expect fun SaveNoteAlertDialog(
 
 @Composable
 expect fun NewNoteAlertDialog(
+    editViewModel: EditViewModel,
     modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit = {},
     onConfirm: () -> Unit = {},

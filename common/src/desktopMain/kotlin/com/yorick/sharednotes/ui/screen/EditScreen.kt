@@ -29,11 +29,15 @@ import com.yorick.sharednotes.ui.components.SharedNotesTopBar
 import com.yorick.sharednotes.ui.components.SharedNotesTwoPane
 import com.yorick.sharednotes.ui.edit.EditContent
 import com.yorick.sharednotes.ui.edit.EditSinglePaneScreen
+import com.yorick.sharednotes.ui.edit.EditViewModel
 import com.yorick.sharednotes.ui.note.NoteContent
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalAnimationApi::class)
+@OptIn(
+    ExperimentalComposeUiApi::class, ExperimentalAnimationApi::class,
+)
 @Composable
 fun EditScreen(
+    editViewModel: EditViewModel,
     modifier: Modifier = Modifier,
     windowState: WindowState,
     title: String,
@@ -62,6 +66,7 @@ fun EditScreen(
         exit = scaleOut(),
     ) {
         NewNoteAlertDialog(
+            editViewModel = editViewModel,
             modifier = Modifier,
             onDismissRequest = onDismissRequest,
             onConfirm = onConfirm,

@@ -136,6 +136,7 @@ fun SharedNotesNavHost(
                 editViewModel.onBackPress()
             }
             EditScreen(
+                editViewModel = editViewModel,
                 modifier = Modifier.padding(end = 3.dp),
                 windowState = windowState,
                 title = editViewModel.noteSubject,

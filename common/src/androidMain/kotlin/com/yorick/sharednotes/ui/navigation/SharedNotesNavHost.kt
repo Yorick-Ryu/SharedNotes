@@ -123,6 +123,7 @@ fun SharedNotesNavHost(
             }
 
             EditScreen(
+                editViewModel = editViewModel,
                 modifier = Modifier.imePadding().systemBarsPadding(),
                 contentType = contentType,
                 displayFeatures = displayFeatures,

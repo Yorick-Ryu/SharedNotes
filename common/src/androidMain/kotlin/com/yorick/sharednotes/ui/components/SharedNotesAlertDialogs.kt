@@ -14,6 +14,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import com.yorick.sharednotes.ui.edit.EditViewModel
 
 @Composable
 actual fun SaveNoteAlertDialog(
@@ -46,6 +47,7 @@ actual fun SaveNoteAlertDialog(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 actual fun NewNoteAlertDialog(
+    editViewModel: EditViewModel,
     modifier: Modifier,
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit,
