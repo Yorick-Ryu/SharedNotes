@@ -43,7 +43,7 @@ fun NotesSinglePaneContent(
     AnimatedVisibility(
         visible = detailVisibility,
         enter = slideInHorizontally(initialOffsetX = { it }),
-        exit = slideOutHorizontally(targetOffsetX = { -it })
+        exit = slideOutHorizontally(targetOffsetX = { it }) + fadeOut()
     ) {
         BackHandler {
             closeDetailScreen()
