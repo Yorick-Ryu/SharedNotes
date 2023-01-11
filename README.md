@@ -1,6 +1,14 @@
 # SharedNotes
 
-***
+[![License](https://img.shields.io/github/license/Yorick-Ryu/SharedNotes)](https://mit-license.org/)
+[![kotlin-version](https://img.shields.io/badge/kotlin-1.7.20-blue)](https://github.com/JetBrains/kotlin)
+[![compose-jb-version](https://img.shields.io/badge/compose--jb-1.2.2-pink)](https://github.com/JetBrains/compose-jb)
+![grade-vision](https://img.shields.io/badge/gradle-7.2.2-blue)
+![Platform](https://img.shields.io/badge/platform-Android-green)
+![Platform](https://img.shields.io/badge/platform-Windows-blue)
+![Platform](https://img.shields.io/badge/platform-Linux-blue)
+![Platform](https://img.shields.io/badge/platform-MacOX-blue)
+![Platform](https://img.shields.io/badge/platform-JVM-red)
 
 A note-taking application that supports real-time sharing, Markdown syntax, and supports Android platform and Desktop platform (Windows, MacOS, Linux).
 
@@ -70,6 +78,11 @@ Limited to time and personal current state of technology, I only developed Andro
 ### Brief introduction
 
 The program consists of five modules: edition, notes, contacts, categories, and tags. Edition involves editing and sharing your notes, supporting  Markdown syntax and dual-screen preview. Notes display notes there are shared by contacts in real time. Contacts may provide the function of viewing and managing contacts (not implemented). And the feature of viewing and managing note categories and tags (not implemented) is supplied by Categories and Tags.
+
+# Dependencies
+
+- [moko resources](https://github.com/icerockdev/moko-resources) ![stars](https://img.shields.io/github/stars/icerockdev/moko-resources)
+- [PreCompose](https://github.com/Tlaster/PreCompose)            ![stars](https://img.shields.io/github/stars/Tlaster/PreCompose)
 
 # LICENSE
 ```
