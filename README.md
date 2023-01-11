@@ -7,12 +7,13 @@
 ![Platform](https://img.shields.io/badge/platform-Android-green)
 ![Platform](https://img.shields.io/badge/platform-Windows-blue)
 ![Platform](https://img.shields.io/badge/platform-Linux-blue)
-![Platform](https://img.shields.io/badge/platform-MacOX-blue)
+![Platform](https://img.shields.io/badge/platform-MacOS-blue)
 ![Platform](https://img.shields.io/badge/platform-JVM-red)
 
-A note-taking application that supports real-time sharing, Markdown syntax, and supports Android platform and Desktop platform (Windows, MacOS, Linux).
+A note-taking application that supports real-time sharing, Markdown syntax, and supports Android
+platform and Desktop platform (Windows, MacOS, Linux).
 
-- 🧑‍💻 Support 📱Android and 💻Desktop Platform 
+- 🧑‍💻 Support 📱Android and 💻Desktop Platform
 - 🎉 Adaptive apps for PC, mobile, tablets and foldables
 - 📖 Support Markdown syntax
 - 🍪 [Material Design 3](https://m3.material.io/)
@@ -56,38 +57,56 @@ Reference from [compose-samples/Reply](https://github.com/android/compose-sample
 |---------------------------------------------|-----------------------------------------------|
 | ![android_medium](./img/android_medium.png) | ![android_compact](./img/android_compact.png) |
 
-
 ## Essay
 
-Hi guys! I am very happy to participate in the Kotlin Multiplatform contest. My English is not very good, there can be grammatical errors or fuzzy phrases in this essay, pardon me.
+Hi guys! I am very happy to participate in the Kotlin Multiplatform contest. My English is not very
+good, there can be grammatical errors or fuzzy phrases in this essay, pardon me.
 
 ### My Background
 
-I am a junior from Nanjing, China, majoring in software engineering. I love new technology like kotlin and that's why I found it and participated in this competition. New technology is very cool. Absolutely android development is my favorite.
+I am a junior from Nanjing, China, majoring in software engineering. I love new technology like
+kotlin and that's why I found it and participated in this competition. New technology is very cool.
+Absolutely android development is my favorite.
 
 ### Project Background
 
-In our class, many students have the habit of taking class notes. 
+In our class, many students have the habit of taking class notes.
 
-But when we wanted to share our notes with other classmates in real time, trouble came. We can't sit together every time, and sometimes we must take online classes because of the COVID-19. It's also not convenient to communicate using chat software like WeChat. For example, to show Markdown. So, I developed Shared Notes, which is a note-taking application that supports real-time sharing, Markdown syntax, and supports Android platform and Desktop platform (Windows, MacOS, Linux). Limited to my hardware device, there is no iOS version now, but it is planned.
+But when we wanted to share our notes with other classmates in real time, trouble came. We can't sit
+together every time, and sometimes we must take online classes because of the COVID-19. It's also
+not convenient to communicate using chat software like WeChat. For example, to show Markdown. So, I
+developed Shared Notes, which is a note-taking application that supports real-time sharing, Markdown
+syntax, and supports Android platform and Desktop platform (Windows, MacOS, Linux). Limited to my
+hardware device, there is no iOS version now, but it is planned.
 
-Depending on time and current personal skills, I have only developed clients for Android and Desktop, which share the full data layer and 75% of the UI layer code. Both Android and desktop platforms support responsive layouts to accommodate devices of different sizes.
+Depending on time and current personal skills, I have only developed clients for Android and
+Desktop, which share the full data layer and 75% of the UI layer code. Both Android and desktop
+platforms support responsive layouts to accommodate devices of different sizes.
 
-Limited to time and personal current state of technology, I only developed Android and Desktop clients, which fully share the data layer and share 75% of the interface layer code. Whether it's Android or desktop, they all support responsive layouts to suit devices of different sizes.
+Limited to time and personal current state of technology, I only developed Android and Desktop
+clients, which fully share the data layer and share 75% of the interface layer code. Whether it's
+Android or desktop, they all support responsive layouts to suit devices of different sizes.
 
 ### Brief introduction
 
-The program consists of five modules: edition, notes, contacts, categories, and tags. Edition involves editing and sharing your notes, supporting  Markdown syntax and dual-screen preview. Notes display notes there are shared by contacts in real time. Contacts may provide the function of viewing and managing contacts (not implemented). And the feature of viewing and managing note categories and tags (not implemented) is supplied by Categories and Tags.
+The program consists of five modules: edition, notes, contacts, categories, and tags. Edition
+involves editing and sharing your notes, supporting Markdown syntax and dual-screen preview. Notes
+display notes there are shared by contacts in real time. Contacts may provide the function of
+viewing and managing contacts (not implemented). And the feature of viewing and managing note
+categories and tags (not implemented) is supplied by Categories and Tags.
 
 # Dependencies
 
-- [compose-jb](https://github.com/JetBrains/compose-jb) ![stars](https://img.shields.io/github/stars/JetBrains/compose-jb)
-- [moko resources](https://github.com/icerockdev/moko-resources) ![stars](https://img.shields.io/github/stars/icerockdev/moko-resources)
-- [markdown](https://github.com/JetBrains/markdown) ![stars](https://img.shields.io/github/stars/JetBrains/markdown)
-- [PreCompose](https://github.com/Tlaster/PreCompose) ![stars](https://img.shields.io/github/stars/Tlaster/PreCompose)
-- [multiplatform-markdown-renderer](https://github.com/mikepenz/multiplatform-markdown-renderer) ![stars](https://img.shields.io/github/stars/mikepenz/multiplatform-markdown-renderer)
+| repository                                                                                     | stars                                                                                  |
+|------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| [compose-jb](https://github.com/JetBrains/compose-jb)                                          | ![stars](https://img.shields.io/github/stars/JetBrains/compose-jb)                     |
+| [moko resources](https://github.com/icerockdev/moko-resources)                                 | ![stars](https://img.shields.io/github/stars/icerockdev/moko-resources)                |
+| [markdown](https://github.com/JetBrains/markdown)                                              | ![stars](https://img.shields.io/github/stars/JetBrains/markdown)                       |
+| [PreCompose](https://github.com/Tlaster/PreCompose)                                            | ![stars](https://img.shields.io/github/stars/Tlaster/PreCompose)                       |
+| [multiplatform-markdown-renderer](https://github.com/mikepenz/multiplatform-markdown-renderer) | ![stars](https://img.shields.io/github/stars/mikepenz/multiplatform-markdown-renderer) |
 
 # LICENSE
+
 ```
 MIT License
 
