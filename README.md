@@ -81,8 +81,11 @@ The program consists of five modules: edition, notes, contacts, categories, and 
 
 # Dependencies
 
+- [compose-jb](https://github.com/JetBrains/compose-jb) ![stars](https://img.shields.io/github/stars/JetBrains/compose-jb)
 - [moko resources](https://github.com/icerockdev/moko-resources) ![stars](https://img.shields.io/github/stars/icerockdev/moko-resources)
-- [PreCompose](https://github.com/Tlaster/PreCompose)            ![stars](https://img.shields.io/github/stars/Tlaster/PreCompose)
+- [markdown](https://github.com/JetBrains/markdown) ![stars](https://img.shields.io/github/stars/JetBrains/markdown)
+- [PreCompose](https://github.com/Tlaster/PreCompose) ![stars](https://img.shields.io/github/stars/Tlaster/PreCompose)
+- [multiplatform-markdown-renderer](https://github.com/mikepenz/multiplatform-markdown-renderer) ![stars](https://img.shields.io/github/stars/mikepenz/multiplatform-markdown-renderer)
 
 # LICENSE
 ```
