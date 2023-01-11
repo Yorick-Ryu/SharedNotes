@@ -12,11 +12,16 @@ object LocalCategoriesDataProvider {
         Category(
             id = 1L,
             name = "Android",
-            sum = 1
+            sum = 2
         ),
         Category(
             id = 2L,
             name = "Java",
+            sum = 1
+        ),
+        Category(
+            id = 3L,
+            name = "Other",
             sum = 1
         )
     )
