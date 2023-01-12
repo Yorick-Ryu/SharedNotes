@@ -2,6 +2,7 @@ package com.yorick.sharednotes.ui.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.FloatingActionButton
@@ -9,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,6 +25,7 @@ import com.yorick.sharednotes.ui.note.NoteListScreen
 import com.yorick.sharednotes.ui.note.NotesSinglePaneContent
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 import com.yorick.sharednotes.ui.utils.SharedNotesNavigationType
+import kotlinx.coroutines.launch
 
 @Composable
 fun NoteScreen(
@@ -41,7 +44,8 @@ fun NoteScreen(
             closeDetailScreen()
         }
     }
-
+    val stateVertical = rememberScrollState()
+    val scope = rememberCoroutineScope()
     val noteLazyListState = rememberLazyListState()
 
     if (contentType == SharedNotesContentType.DUAL_PANE) {
@@ -50,7 +54,12 @@ fun NoteScreen(
                 NoteListScreen(
                     notes = notesUIState.notes,
                     noteLazyListState = noteLazyListState,
-                    navigateToDetail = navigateToDetail,
+                    navigateToDetail = { id, type ->
+                        scope.launch {
+                            stateVertical.animateScrollTo(0)
+                        }
+                        navigateToDetail(id, type)
+                    },
                     tagsGrid = tagsGrid
                 )
             },
@@ -58,7 +67,8 @@ fun NoteScreen(
                 NoteDetailScreen(
                     note = notesUIState.selectedNote ?: notesUIState.notes.first(),
                     isFullScreen = false,
-                    addNote = addNote
+                    addNote = addNote,
+                    stateVertical = stateVertical
                 )
             },
             strategy = HorizontalTwoPaneStrategy(splitFraction = 0.5f, gapWidth = 0.dp),
@@ -71,8 +81,14 @@ fun NoteScreen(
                 noteLazyListState = noteLazyListState,
                 modifier = Modifier.fillMaxSize(),
                 closeDetailScreen = closeDetailScreen,
-                navigateToDetail = navigateToDetail,
+                navigateToDetail = { id, type ->
+                    scope.launch {
+                        stateVertical.animateScrollTo(0)
+                    }
+                    navigateToDetail(id, type)
+                },
                 addNote = addNote,
+                stateVertical = stateVertical,
                 tagsGrid = tagsGrid
             )
             if (navigationType == SharedNotesNavigationType.BOTTOM_NAVIGATION) {

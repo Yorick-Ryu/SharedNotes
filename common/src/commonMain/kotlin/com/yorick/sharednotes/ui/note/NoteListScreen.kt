@@ -81,7 +81,7 @@ fun NoteDetailScreen(
         }
         NoteContent(
             noteBody = note.body,
-            stateVertical = stateVertical
+            stateVertical = stateVertical,
         )
     }
 }

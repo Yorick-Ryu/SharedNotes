@@ -110,7 +110,7 @@ categories and tags (not implemented) is supplied by Categories and Tags.
 ```
 MIT License
 
-Copyright (c) 2023 Ruiyu
+Copyright (c) 2023 Rui Yu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

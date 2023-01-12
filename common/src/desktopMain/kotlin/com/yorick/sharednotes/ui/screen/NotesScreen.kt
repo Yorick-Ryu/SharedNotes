@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,6 +26,7 @@ import com.yorick.sharednotes.ui.note.NoteDetailScreen
 import com.yorick.sharednotes.ui.note.NoteListScreen
 import com.yorick.sharednotes.ui.note.NotesSinglePaneContent
 import com.yorick.sharednotes.ui.utils.SharedNotesContentType
+import kotlinx.coroutines.launch
 
 @Composable
 fun NotesScreen(
@@ -39,6 +41,7 @@ fun NotesScreen(
     val noteLazyListState = rememberLazyListState()
     val isTwoPane: Boolean = windowState.size.width > 850.dp
     val stateVertical = rememberScrollState()
+    val scope = rememberCoroutineScope()
     AnimatedVisibility(
         visible = isTwoPane,
         enter = expandHorizontally(initialWidth = { it * 5 / 13 }),
@@ -50,7 +53,12 @@ fun NotesScreen(
                 NoteListScreen(
                     notes = notesUIState.notes,
                     noteLazyListState = noteLazyListState,
-                    navigateToDetail = navigateToDetail,
+                    navigateToDetail = { id, type ->
+                        scope.launch {
+                            stateVertical.animateScrollTo(0)
+                        }
+                        navigateToDetail(id, type)
+                    },
                     tagsGrid = tagsGrid
                 )
             },
@@ -99,13 +107,16 @@ fun NotesScreen(
                 notesUIState = notesUIState,
                 noteLazyListState = noteLazyListState,
                 closeDetailScreen = closeDetailScreen,
-                navigateToDetail = navigateToDetail,
+                navigateToDetail = { id, type ->
+                    scope.launch {
+                        stateVertical.animateScrollTo(0)
+                    }
+                    navigateToDetail(id, type)
+                },
                 addNote = addNote,
                 tagsGrid = tagsGrid,
                 stateVertical = stateVertical
             )
         }
     }
-
-
 }
