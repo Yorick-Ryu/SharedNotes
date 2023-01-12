@@ -13,9 +13,12 @@
 A note-taking application that supports real-time sharing, Markdown syntax, and supports Android
 platform and Desktop platform (Windows, MacOS, Linux).
 
-- 🧑‍💻 Support 📱Android and 💻Desktop Platform
-- 🎉 Adaptive apps for PC, mobile, tablets and foldables
-- 📖 Support Markdown syntax
+- 🧑‍💻
+  Support [📱Android](https://github.com/Yorick-Ryu/SharedNotes/releases/download/1.0.0_demo/android-debug.apk)
+  and [💻Desktop](https://github.com/Yorick-Ryu/SharedNotes/releases/tag/1.0.0_demo) Platform
+- 🎉 [Adaptive apps ](https://developer.android.google.cn/jetpack/compose/layouts/adaptive)
+  for [PC](#-adaptive-apps-for-pc), [mobile, tablets and foldables](#-adaptive-apps-for-mobile-tablets-and-foldables)
+- 📖 Support [markdown](https://github.com/JetBrains/markdown) syntax
 - 🍪 [Material Design 3](https://m3.material.io/)
 - 🌈 [Dynamic color](https://m3.material.io/styles/color/dynamic-color/overview)
 
@@ -100,6 +103,7 @@ categories and tags (not implemented) is supplied by Categories and Tags.
 | repository                                                                                     | stars                                                                                  |
 |------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
 | [compose-jb](https://github.com/JetBrains/compose-jb)                                          | ![stars](https://img.shields.io/github/stars/JetBrains/compose-jb)                     |
+| [accompanist-adaptive](https://google.github.io/accompanist/adaptive/)                         | ![stars](https://img.shields.io/github/stars/google/accompanist)                       |
 | [moko resources](https://github.com/icerockdev/moko-resources)                                 | ![stars](https://img.shields.io/github/stars/icerockdev/moko-resources)                |
 | [markdown](https://github.com/JetBrains/markdown)                                              | ![stars](https://img.shields.io/github/stars/JetBrains/markdown)                       |
 | [PreCompose](https://github.com/Tlaster/PreCompose)                                            | ![stars](https://img.shields.io/github/stars/Tlaster/PreCompose)                       |
