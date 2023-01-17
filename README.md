@@ -60,6 +60,19 @@ Reference from [compose-samples/Reply](https://github.com/android/compose-sample
 |---------------------------------------------|-----------------------------------------------|
 | ![android_medium](./img/android_medium.png) | ![android_compact](./img/android_compact.png) |
 
+## 🛠️ Build
+
+Build Desktop App
+
+1. `Fork` or [Download](https://github.com/Yorick-Ryu/SharedNotes/archive/refs/heads/master.zip)
+   this repository
+2. Open in IntelliJ IDEA and wait Gradle Sync
+3. Click Gradle And Run `packageDistributionForCurrentOS`
+
+| 1                                   | 2                                     |
+|-------------------------------------|---------------------------------------|
+| ![img.png](desktop/img/build_1.png) | ![img_1.png](desktop/img/build_2.png) |
+
 ## Essay
 
 Hi guys! I am very happy to participate in the Kotlin Multiplatform contest. My English is not very
