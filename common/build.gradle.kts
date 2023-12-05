@@ -39,15 +39,15 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
-                api("androidx.appcompat:appcompat:1.5.1")
-                api("androidx.core:core-ktx:1.9.0")
-                implementation("androidx.window:window:1.0.0")
+                api("androidx.appcompat:appcompat:1.6.1")
+                api("androidx.core:core-ktx:1.12.0")
+                implementation("androidx.window:window:1.1.0")
                 implementation("com.google.accompanist:accompanist-adaptive:0.28.0")
-                implementation("androidx.navigation:navigation-compose:2.5.3")
-                implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03")
-                implementation("androidx.compose.material3:material3:1.1.0-alpha03")
-                implementation("androidx.compose.material:material-icons-extended:1.4.0-alpha03")
-                implementation("androidx.compose.material3:material3-window-size-class:1.1.0-alpha03")
+                implementation("androidx.navigation:navigation-compose:2.7.5")
+                implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0-beta01")
+                implementation("androidx.compose.material3:material3:1.2.0-alpha10")
+                implementation("androidx.compose.material:material-icons-extended:1.6.0-alpha08")
+                implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha10")
             }
         }
 
@@ -61,11 +61,11 @@ kotlin {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

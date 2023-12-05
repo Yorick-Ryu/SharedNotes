@@ -3,9 +3,9 @@ package com.yorick.sharednotes.ui.navigation
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -22,7 +22,6 @@ import com.yorick.sharednotes.ui.utils.SharedNotesContentType
 import com.yorick.sharednotes.ui.utils.SharedNotesNavigationType
 import kotlinx.coroutines.CoroutineScope
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun SharedNotesNavHost(
     navController: NavHostController,
